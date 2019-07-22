@@ -14,11 +14,12 @@ JINJA_ENV = jinja2.Environment(
     autoescape=True)
 
 class MainPage(webapp2.RequestHandler):
-    def get(self): #for a get request
-        self.response.headers['Content-Type'] = 'text/html'
-        index_template = JINJA_ENV.get_template('templates/homePageOne.html')
-        values = {'clues': get_random_clues(5)}
-        self.response.write(index_template.render(values))
+    # def get(self): #for a get request
+    #     self.response.headers['Content-Type'] = 'text/html'
+    #     index_template = JINJA_ENV.get_template('templates/homePageOne.html')
+    #     values = {'clues': get_random_clues(5)}
+    #     self.response.write(index_template.render(values))
+    #     #print("Hello")
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
