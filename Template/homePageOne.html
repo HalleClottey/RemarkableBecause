@@ -16,12 +16,23 @@
   <!-- when the user is not logged in -->
   <a href="{{login_url}}">Login</a>
   <h1>#IAmRemarkable</h1>
-  <button class = "resources">Resources</button>
-  <button class = "quotes">Motivational Quotes</button>
-  <button class = "help">Help</button>
+  <!-- <button class = "resources">Resources</button> -->
+  <form method="Get" action="/resources">
+    <input onclick = "window.location.href = /resources" type="submit" name="" value="Resources">
+  </form>
+
+  <form method="Get" action="/motivation">
+  <input onclick = "window.location.href = /motivation" type="submit" name="" value="Quotes">
+  </form>
+
+  <form method="Get" action="/help">
+  <input onclick = "window.location.href = /help" type="submit" name="" value="Help">
+  </form>
   {% endif %}
 
-
+  <!-- <form method="Get" action="/resources">
+    <input onclick = "window.location.href = /resources" type="submit" name="Resources" value="Submit">
+  </form> -->
 
 
   </body>
