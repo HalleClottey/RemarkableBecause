@@ -30,7 +30,7 @@ class MainPageUser(webapp2.RequestHandler):
     def get(self): #for a get request
         self.response.headers['Content-Type'] = 'text/html'
         user = users.get_current_user()
-        template = JINJA_ENVIRONMENT.get_template('Template/homePageOne.html')
+        template = JINJA_ENVIRONMENT.get_template('Template/homepageuser.html')
         data = {
           'user': user,
           'login_url': users.create_login_url('/'),
