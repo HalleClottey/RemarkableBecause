@@ -6,5 +6,16 @@
   </head>
   <body>
     <h1>Testing</h1>
+    <!-- using the if statement in jinja  -->
+  {% if user %}
+
+  <h1>User is {{user.email()}}</h1>
+  <!-- allows the user to log out  -->
+  <a href="{{logout_url}}">Logout</a>
+  {% else %}
+  <h1>No user!</h1>
+  <!-- when the user is not logged in -->
+  <a href="{{login_url}}">Login</a>
+  {% endif %}
   </body>
 </html>
