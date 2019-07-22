@@ -8,7 +8,7 @@ from google.appengine.api import users
 
 # This initializes the jinja2 Environment.
 # This will be the same in every app that uses the jinja2 templating library.
-JINJA_ENV = jinja2.Environment(
+JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
