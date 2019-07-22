@@ -7,9 +7,11 @@
   <body>
     <!-- using the if statement in jinja  -->
   {% if user %}
+
   <h1>Hello {{user.email()}}!</h1>
   <!-- allows the user to log out  -->
   <a href="{{logout_url}}">Logout</a>
+
   {% else %}
   <h1>Please log in for a personal experience!</h1>
   <!-- when the user is not logged in -->
@@ -19,7 +21,6 @@
   <h1>#IAmRemarkable</h1>
 
   <button class = "resources">Resources</button>
-
   <button class = "quotes">Motivational Quotes</button>
   </body>
 </html>
