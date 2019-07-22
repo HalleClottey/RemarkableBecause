@@ -6,19 +6,32 @@
   </head>
   <body>
     <h1>#IAmRemarkable</h1>
-    <button type="button"> What makes you remarkable ?</button>
-    <button class = "resources">Resources</button>
-    <button class = "quotes">Motivational Quotes</button>
-    <button class = "diart">Diary</button>
-    <button class = "Calendar">Calendar</button>
-    <button class = "help">Help</button>
 
+<!-- These are the form methods for the individual buttons -->
+    <form method="Get" action="/remarkable">
+      <input onclick = "window.location.href = /remarkable" type="submit" name="" value="What makes you Remarkable?">
+    </form>
 
-    <!-- <a href="./resources">Resources</a>
-    <a href="./quotes">Quotes</a>
-    <a href="./diary">Diary</a>
-    <a href="./calendar">Calendar</a>
-    <a href="./help">Help</a> -->
+    <form method="Get" action="/resources">
+      <input onclick = "window.location.href = /resources" type="submit" name="" value="Resources">
+    </form>
+
+    <form method="Get" action="/motivation">
+    <input onclick = "window.location.href = /motivation" type="submit" name="" value="Quotes">
+    </form>
+
+    <form method="Get" action="/diary">
+      <input onclick = "window.location.href = /diary" type="submit" name="" value="Diary Entries">
+    </form>
+
+    <form method="Get" action="/calendar">
+      <input onclick = "window.location.href = /calendar" type="submit" name="" value="Calendar">
+    </form>
+
+    <form method="Get" action="/help">
+    <input onclick = "window.location.href = /help" type="submit" name="" value="Help">
+    </form>
+
     <a href="{{logout_url}}">Logout</a>
   </body>
 </html>
