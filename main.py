@@ -6,6 +6,7 @@ import json
 from google.appengine.api import users
 from google.appengine.ext import ndb
 #importing api key
+<<<<<<< HEAD
 import api_key.py
 
 #function to retrieve quotes from the Quotes API
@@ -17,15 +18,18 @@ import api_key.py
 # quotes_api_url: "https://healthruwords.p.rapidapi.com/v1/quotes/"
 # quotes_response: urlfetch.fetch(url = quotes_api_url, headers=headers).content
 # }
+=======
+# import api_key
+>>>>>>> 2d8e97930bd883da02857531bba2cf54e4083b3b
 
 def root_parent():
     '''A single key to be used as the ancestor for all dog entries.
     Allows for strong consistency at the cost of scalability.'''
     return ndb.Key('Parent', 'default_parent')
 
-class UserNote(ndb.Model):
-    user = ndb.UserProperty()
-    note = ndb.StringProperty()
+class Remarkable(ndb.Model):
+    '''A database entry representing why they're remarkable.'''
+    remarkable_because = ndb.StringProperty()
 
 # This initializes the jinja2 Environment.
 # This will be the same in every app that uses the jinja2 templating library.
@@ -138,6 +142,15 @@ class Remarkable_Handler(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/html'
         self.response.write(template.render(data))
 
+    def post(self):
+        user = users.get_current_user()
+        new_response = Remarkable(parent=root_parent())
+        new_response.remarkable_because = self.request.get('remarkable_post')
+        new_response.put()
+        self.redirect('/thankyou')
+
+
+
 
 class Thank_You_Handler(webapp2.RequestHandler):
     def get(self): #for a get request
@@ -151,6 +164,9 @@ class Thank_You_Handler(webapp2.RequestHandler):
         }
         self.response.headers['Content-Type'] = 'text/html'
         self.response.write(template.render(data))
+
+
+
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
