@@ -13,12 +13,25 @@
     <a href="./help">Help</a>
     <h1>I am remarkable because...</h1>
 
-    <input type="text" name="" value="" placeholder="What makes you remarkable?">
+    <!-- Text box for whay makes you remarkable? -->
+    <form class="" action="" method="">
+      <input type="text" name="" value="" style = "width: 300px;"
+        placeholder="What makes you remarkable?">
+    </form>
 
+    <!-- Displays current date -->
+    <p><script> document.write(new Date().toLocaleDateString()); </script></p>
+
+
+    <!-- Allows user to select year and date:
+    <input type='date' id='hasta' value='<?php echo date('Y-m-d');?> -->
+
+    <!-- Submit button -->
     <form method="Post" action="/remarkable">
       <input onclick = "window.location.href = /remarkable" type="submit" name="" value="Submit">
     </form>
 
+    <!-- Why am I remarkable? button -->
     <form method="Get" action="/remarkable">
       <input onclick = "window.location.href = /home" type="submit" name="" value="Why am I remarkable?">
     </form>
