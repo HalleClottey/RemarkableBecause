@@ -15,7 +15,7 @@
 
     <!-- Text box for whay makes you remarkable? -->
     <form class="" action="" method="">
-      <input type="text" name="" value="" placeholder="What makes you remarkable?" style = "width:500px; height:200px;font-size=13pt;">
+      <textarea type="text" name="" value="" placeholder="What makes you remarkable?" style = "width:450px; height:150px;font-size:18pt;"></textarea>
     </form>
 
 <!-- <script type="text/javascript" src="/js/main.js"></script> inside scripts tag-->
@@ -24,17 +24,18 @@
     <p><script> document.write(new Date().toLocaleDateString()); </script></p>
 
 
-    <!-- Allows user to select year and date:
-    <input type='date' id='hasta' value='<?php echo date('Y-m-d');?> -->
-
     <!-- Submit button -->
-    <form method="Post" action="/remarkable">
-      <input onclick = "window.location.href = /remarkable" type="submit" name="" value="Submit">
+    <form method="Get" action="/thankyou">
+      <input onclick = "window.location.href = /thankyou" type="submit" name="" value="Submit">
     </form>
 
     <!-- Why am I remarkable? button -->
     <form method="Get" action="/remarkable">
       <input onclick = "window.location.href = /home" type="submit" name="" value="Why am I remarkable?">
     </form>
+
+    <!-- Allows user to select year and date: -->
+    <input type='date' id='hasta' value='<?php echo date('Y-m-d');?>
+
   </body>
 </html>

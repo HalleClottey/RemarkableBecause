@@ -4,8 +4,18 @@ import os
 from google.appengine.api import urlfetch
 import json
 from google.appengine.api import users
+from google.appengine.ext import ndb
+#importing api key
+#import api_key
 
+def root_parent():
+    '''A single key to be used as the ancestor for all dog entries.
+    Allows for strong consistency at the cost of scalability.'''
+    return ndb.Key('Parent', 'default_parent')
 
+class UserNote(ndb.Model):
+    user = ndb.UserProperty()
+    note = ndb.StringProperty()
 
 # This initializes the jinja2 Environment.
 # This will be the same in every app that uses the jinja2 templating library.
@@ -118,6 +128,20 @@ class Remarkable_Handler(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/html'
         self.response.write(template.render(data))
 
+
+class Thank_You_Handler(webapp2.RequestHandler):
+    def get(self): #for a get request
+        self.response.headers['Content-Type'] = 'text/html'
+        user = users.get_current_user()
+        template = JINJA_ENVIRONMENT.get_template('Template/thankyou.html')
+        data = {
+          'user': user,
+          'login_url': users.create_login_url('/'),
+          'logout_url': users.create_logout_url('/'),
+        }
+        self.response.headers['Content-Type'] = 'text/html'
+        self.response.write(template.render(data))
+
 app = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/home', MainPageUser),
@@ -127,4 +151,5 @@ app = webapp2.WSGIApplication([
     ('/calendar',Calendar_Handler),
     ('/remarkable',Remarkable_Handler),
     ('/help',Help_Handler),
+    ('/thankyou',Thank_You_Handler),
 ], debug=True)
