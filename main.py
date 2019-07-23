@@ -5,7 +5,7 @@ from google.appengine.api import urlfetch
 import json
 from google.appengine.api import users
 from google.appengine.ext import ndb
-import api_key.py
+# import api_key.py
 
 def root_parent():
     '''A single key to be used as the ancestor for all dog entries.
@@ -14,7 +14,9 @@ def root_parent():
 
 class Remarkable(ndb.Model):
     '''A database entry representing why they're remarkable.'''
+    user = ndb.UserProperty()
     remarkable_because = ndb.StringProperty()
+    
 
 # This initializes the jinja2 Environment.
 # This will be the same in every app that uses the jinja2 templating library.
