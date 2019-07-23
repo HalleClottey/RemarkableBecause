@@ -4,7 +4,7 @@ import os
 from google.appengine.api import urlfetch
 import json
 from google.appengine.api import users
-#importing api key 
+#importing api key
 import api_key
 
 
@@ -119,6 +119,19 @@ class Remarkable_Handler(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/html'
         self.response.write(template.render(data))
 
+class Test_Handler(webapp2.RequestHandler):
+    def get(self): #for a get request
+        self.response.headers['Content-Type'] = 'text/html'
+        user = users.get_current_user()
+        template = JINJA_ENVIRONMENT.get_template('Template/test.html')
+        data = {
+          'user': user,
+          'login_url': users.create_login_url('/'),
+          'logout_url': users.create_logout_url('/'),
+        }
+        self.response.headers['Content-Type'] = 'text/html'
+        self.response.write(template.render(data))
+
 app = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/home', MainPageUser),
@@ -127,5 +140,6 @@ app = webapp2.WSGIApplication([
     ('/diary',Diary_Handler),
     ('/calendar',Calendar_Handler),
     ('/remarkable',Remarkable_Handler),
-    ('/help',Help_Handler),
+    ('/help', Help_Handler),
+    ('/test', Test_Handler)
 ], debug=True)
