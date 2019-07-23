@@ -95,6 +95,25 @@ class Diary_Handler(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/html'
         self.response.write(template.render(data))
 
+class New_Diary_Entry_Handler(webapp2.RequestHandler):
+    def get(self): #for a get request
+        self.response.headers['Content-Type'] = 'text/html'
+        user = users.get_current_user()
+        template = JINJA_ENVIRONMENT.get_template('Template/NewDiaryEntry.html')
+        data = {
+          'user': user,
+          'login_url': users.create_login_url('/'),
+          'logout_url': users.create_logout_url('/'),
+        }
+        self.response.headers['Content-Type'] = 'text/html'
+        self.response.write(template.render(data))
+    def post(self):
+        user = users.get_current_user()
+        new_entry = Diary_Entry(parent=root_parent())
+        new_entry.entry = self.request.get('diary_post')
+        new_entry.put()
+        self.redirect('/diary')
+
 class Calendar_Handler(webapp2.RequestHandler):
     def get(self): #for a get request
         self.response.headers['Content-Type'] = 'text/html'
@@ -177,6 +196,7 @@ app = webapp2.WSGIApplication([
     ('/resources',Resources_Handler),
     ('/motivation',Quotes_Handler),
     ('/diary',Diary_Handler),
+    ('/diaryentry',New_Diary_Entry_Handler),
     ('/calendar',Calendar_Handler),
     ('/remarkable',Remarkable_Handler),
     ('/help',Help_Handler),
