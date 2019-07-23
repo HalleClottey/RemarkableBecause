@@ -11,9 +11,13 @@
     <a href="./diary">Diary</a>
     <a href="./calendar">Calendar</a>
     <a href="./help">Help</a>
+    <a href="{{logout_url}}">Logout</a>
     <h1>#IAmRemarkable</h1>
 
     <h2>Welcome!</h2>
+    <!-- Displays current date -->
+    <p><script> document.write(new Date().toLocaleDateString()); </script></p>
+
     <form class="" action="/diaryentry" method="Post">
       <textarea type="text" name="diary_post" value="" placeholder="How are you feeling toady?" style = "width:650px; height:350px;font-size:14pt;"></textarea>
       <input action = "/diary" type="submit" name="" value="Submit">
