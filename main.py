@@ -6,7 +6,21 @@ import json
 from google.appengine.api import users
 from google.appengine.ext import ndb
 #importing api key
+<<<<<<< HEAD
+import api_key.py
+
+#function to retrieve quotes from the Quotes API
+# def getQuotes(){
+#   headers={
+#     "X-RapidAPI-Host": "healthruwords.p.rapidapi.com",
+#     "X-RapidAPI-Key": api_key.val_key
+#   }
+# quotes_api_url: "https://healthruwords.p.rapidapi.com/v1/quotes/"
+# quotes_response: urlfetch.fetch(url = quotes_api_url, headers=headers).content
+# }
+=======
 # import api_key
+>>>>>>> 2d8e97930bd883da02857531bba2cf54e4083b3b
 
 def root_parent():
     '''A single key to be used as the ancestor for all dog entries.
