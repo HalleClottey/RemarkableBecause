@@ -107,6 +107,12 @@ class New_Diary_Entry_Handler(webapp2.RequestHandler):
         }
         self.response.headers['Content-Type'] = 'text/html'
         self.response.write(template.render(data))
+    def post(self):
+        user = users.get_current_user()
+        new_entry = Diary_Entry(parent=root_parent())
+        new_entry.entry = self.request.get('diary_post')
+        new_entry.put()
+        self.redirect('/diary')
 
 class Calendar_Handler(webapp2.RequestHandler):
     def get(self): #for a get request
