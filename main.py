@@ -196,7 +196,6 @@ class Test_Handler(webapp2.RequestHandler):
         self.response.write(template.render(data))
 
 
-
 app = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/home', MainPageUser),
