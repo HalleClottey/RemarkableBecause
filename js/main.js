@@ -9,7 +9,7 @@ function startTimer() {
 
 // Ask the server for the current note immediately.
 function fetchCurrentNote() {
-  fetch('/ajax/get_current_node')
+  fetch('/ajax')
     .then(function(response) {
       return response.json()
     })
