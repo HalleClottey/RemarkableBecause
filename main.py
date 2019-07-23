@@ -115,6 +115,7 @@ class New_Diary_Entry_Handler(webapp2.RequestHandler):
         new_entry = Diary_Entry(parent=root_parent())
         new_entry.entry = self.request.get('diary_post')
         new_entry.user = user
+        new_entry.date = datetime.datetime.now().strftime("%B %d, %Y")
         new_entry.put()
         self.redirect('/diary')
 
