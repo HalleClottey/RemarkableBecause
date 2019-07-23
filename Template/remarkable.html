@@ -7,33 +7,36 @@
   <body>
     <a href = "./home"> Home </a>
     <a href="./resources">Resources</a>
-    <a href="./quotes">Quotes</a>
+    <a href="./motivation">Quotes</a>
     <a href="./diary">Diary</a>
     <a href="./calendar">Calendar</a>
     <a href="./help">Help</a>
     <h1>I am remarkable because...</h1>
 
     <!-- Text box for whay makes you remarkable? -->
-    <form class="" action="" method="">
-      <input type="text" name="" value="" style = "width: 300px;"
-        placeholder="What makes you remarkable?">
+    <form class="" action="/remarkable" method="Post">
+      <textarea type="text" name="remarkable_post" value="" placeholder="What makes you remarkable?" style = "width:450px; height:150px;font-size:18pt;"></textarea>
+        <input type="submit" name="" value="Submit">
     </form>
+
+<!-- <script type="text/javascript" src="/js/main.js"></script> inside scripts tag-->
 
     <!-- Displays current date -->
     <p><script> document.write(new Date().toLocaleDateString()); </script></p>
 
 
-    <!-- Allows user to select year and date:
-    <input type='date' id='hasta' value='<?php echo date('Y-m-d');?> -->
-
     <!-- Submit button -->
-    <form method="Post" action="/remarkable">
-      <input onclick = "window.location.href = /remarkable" type="submit" name="" value="Submit">
+    <form method="Get" action="/thankyou">
+
     </form>
 
     <!-- Why am I remarkable? button -->
     <form method="Get" action="/remarkable">
       <input onclick = "window.location.href = /home" type="submit" name="" value="Why am I remarkable?">
     </form>
+
+    <!-- Allows user to select year and date: -->
+    <input type='date' id='hasta' value='<?php echo date('Y-m-d');?>
+
   </body>
 </html>
