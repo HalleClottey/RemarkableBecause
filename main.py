@@ -21,7 +21,7 @@ class Remarkable(ndb.Model):
 class Diary_Entry(ndb.Model):
     user = ndb.UserProperty()
     entry = ndb.StringProperty()
-    date = ndb.StringProperty() #Date property
+    date = ndb.StringProperty()
 
 # This initializes the jinja2 Environment.
 # This will be the same in every app that uses the jinja2 templating library.
@@ -91,6 +91,7 @@ class Diary_Handler(webapp2.RequestHandler):
           'user': user,
           'login_url': users.create_login_url('/'),
           'logout_url': users.create_logout_url('/'),
+          'entries': Diary_Entry.query(Diary_Entry.user == user, ancestor=root_parent()).fetch()
         }
         self.response.headers['Content-Type'] = 'text/html'
         self.response.write(template.render(data))
@@ -111,6 +112,7 @@ class New_Diary_Entry_Handler(webapp2.RequestHandler):
         user = users.get_current_user()
         new_entry = Diary_Entry(parent=root_parent())
         new_entry.entry = self.request.get('diary_post')
+        new_entry.user = user
         new_entry.put()
         self.redirect('/diary')
 
@@ -159,9 +161,6 @@ class Remarkable_Handler(webapp2.RequestHandler):
         new_response.remarkable_because = self.request.get('remarkable_post')
         new_response.put()
         self.redirect('/thankyou')
-
-
-
 
 class Thank_You_Handler(webapp2.RequestHandler):
     def get(self): #for a get request

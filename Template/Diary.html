@@ -17,10 +17,12 @@
     <form method="Get" action="/diaryentry">
       <input onclick = "window.location.href = /diaryentry" type="submit" name="" value="+ New entry">
     </form>
-
 <!-- <script type="text/javascript" src="/js/main.js"></script> inside scripts tag-->
-
-
-
+    {% for entry in entries %}
+      <div>
+        <p>{{entry.entry}}</p>
+        <p>{{entry.date}}</p>
+      </div>
+    {% endfor %}
   </body>
 </html>
