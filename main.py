@@ -6,7 +6,7 @@ import json
 from google.appengine.api import users
 from google.appengine.ext import ndb
 #importing api key
-import api_key
+#import api_key
 
 def root_parent():
     '''A single key to be used as the ancestor for all dog entries.
