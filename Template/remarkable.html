@@ -3,6 +3,16 @@
   <head>
     <meta charset="utf-8">
     <title>Why am I Remarkable?</title>
+    <script type="text/javascript">
+    function Visible() {
+      const x = document.getElementById("motivational_display");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    }
+    </script>
   </head>
   <body>
     <a href = "./home"> Home </a>
@@ -23,18 +33,33 @@
 <!-- <script type="text/javascript" src="/js/main.js"></script> inside scripts tag-->
 
     <!-- Displays current date -->
-    <p><script> document.write(new Date().toLocaleDateString()); </script></p>
-
-
-
+        <!-- <p><script> document.write(new Date().toLocaleDateString()); </script></p> -->
+        <div class="">
+          Today is {{i_am_remarkable_because.date}}
+        </div>
 
     <!-- Why am I remarkable? button -->
-    <form method="Get" action="/remarkable">
+    <!-- <form method="Get" action="/remarkable">
       <input onclick = "window.location.href = /home" type="submit" name="" value="Why am I remarkable?">
-    </form>
+    </form> -->
+    <!-- <div class="boxed">
+        This text is enclosed in a box.
+    </div> -->
+    <!-- <form method="Get" action="/remarkable">
+      <input onclick = "window.location.href = /home" type="submit" name="" value="">
+    </form> -->
+
+    <button onclick = "Visible()" type="submit" name="button">Why am I remarkable?</button>
+
+      <div id ="motivational_display" style = "display: none;" >
+        On {{i_am_remarkable_because.date}}, you wrote: I am remarkable because {{i_am_remarkable_because.remarkable_because}}
+      </div>
+
+<!-- <textarea type="text" name="" style = "width:450px; height:150px;font-size:18pt;"></textarea> -->
+
 
     <!-- Allows user to select year and date: -->
-    <input type='date' id='hasta' value='<?php echo date('Y-m-d');?>
+    <!-- <input type='date' id='hasta' value='<?php echo date('Y-m-d');?> -->
 
   </body>
 </html>

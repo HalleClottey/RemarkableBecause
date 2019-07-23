@@ -4,7 +4,9 @@ import os
 from google.appengine.api import urlfetch
 import json
 from google.appengine.api import users
+import random
 from google.appengine.ext import ndb
+import datetime
 # import api_key.py
 
 def root_parent():
@@ -147,17 +149,21 @@ class Remarkable_Handler(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/html'
         user = users.get_current_user()
         template = JINJA_ENVIRONMENT.get_template('Template/remarkable.html')
+        all_remarkables = Remarkable.query(ancestor=root_parent()).fetch()
         data = {
           'user': user,
           'login_url': users.create_login_url('/'),
           'logout_url': users.create_logout_url('/'),
+          'i_am_remarkable_because': random.choice(all_remarkables),
         }
         self.response.headers['Content-Type'] = 'text/html'
         self.response.write(template.render(data))
 
+
     def post(self):
         user = users.get_current_user()
         new_response = Remarkable(parent=root_parent())
+        new_response.date = datetime.datetime.now().strftime("%B %d, %Y")
         new_response.remarkable_because = self.request.get('remarkable_post')
         new_response.put()
         self.redirect('/thankyou')
