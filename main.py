@@ -7,8 +7,22 @@ from google.appengine.api import users
 import random
 from google.appengine.ext import ndb
 import datetime
-# import api_key.py
+import api_key
 
+#function to retrieve quotes from the api
+def getQuotes():
+
+  headers={
+    "X-RapidAPI-Host": "healthruwords.p.rapidapi.com",
+    "X-RapidAPI-Key": api_key.rapidapi_key
+  }
+
+  quotes_api_url= "https://healthruwords.p.rapidapi.com/v1/quotes/?size=medium"
+  quotes_response = urlfetch.fetch(url = quotes_api_url, headers = headers).content
+  quotes_json = json.loads(quotes_response)
+  all_quotes = {}
+
+  return quotes_json
 def root_parent():
     '''A single key to be used as the ancestor for all dog entries.
     Allows for strong consistency at the cost of scalability.'''
@@ -72,6 +86,9 @@ class Resources_Handler(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/html'
         self.response.write(template.render(data))
 
+
+
+#class that retrieves and pulls quotes from the API
 class Quotes_Handler(webapp2.RequestHandler):
     def get(self): #for a get request
         self.response.headers['Content-Type'] = 'text/html'
@@ -84,6 +101,18 @@ class Quotes_Handler(webapp2.RequestHandler):
         }
         self.response.headers['Content-Type'] = 'text/html'
         self.response.write(template.render(data))
+
+    def get(self):
+        self.response.headers['Content-Type'] = 'text/html'
+        index_template = JINJA_ENVIRONMENT.get_template('Template/Quotes.html')
+        self.response.write(index_template.render({'message':getQuotes()}))
+
+    def post(self):
+        self.response.headers['Content-Type'] = 'text/html'
+        index_template = JINJA_ENVIRONMENT.get_template('Template/Quotes.html')
+        self.response.write(index_template.render({'message':getQuotes()}))
+
+
 
 class Diary_Handler(webapp2.RequestHandler):
     def get(self): #for a get request
