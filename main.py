@@ -156,12 +156,14 @@ class Display_Diary_Entry_Handler(webapp2.RequestHandler):
     def get(self): #for a get request
         self.response.headers['Content-Type'] = 'text/html'
         user = users.get_current_user()
+        entry_key = ndb.Key(urlsafe=self.request.get('entry_key'))
+        diary_entry = entry_key.get()
         template = JINJA_ENVIRONMENT.get_template('Template/DisplayDiaryEntry.html')
         data = {
           'user': user,
           'login_url': users.create_login_url('/'),
           'logout_url': users.create_logout_url('/'),
-          'entries': Diary_Entry.query(Diary_Entry.user == user, ancestor=root_parent()).fetch()
+          'entry': diary_entry,
         }
         self.response.headers['Content-Type'] = 'text/html'
         self.response.write(template.render(data))

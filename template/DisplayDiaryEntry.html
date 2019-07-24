@@ -5,6 +5,19 @@
     <title></title>
   </head>
   <body>
-    <h1>Display Diary Entry</h1>
+    <a href = "./home"> Home </a>
+    <a href = "./remarkable"> #I Am Remarkable </a>
+    <a href="./resources">Resources</a>
+    <a href="./motivation">Quotes</a>
+    <a href="./diary">Diary</a>
+    <a href="./calendar">Calendar</a>
+    <a href="./help">Help</a>
+    <a href="{{logout_url}}">Logout</a>
+    <h1>#IAmRemarkable</h1>
+
+    <h3>Diary Entry: {{entry.date}}</h3>
+    <div class="">
+      {{entry.entry}}
+    </div>
   </body>
 </html>
