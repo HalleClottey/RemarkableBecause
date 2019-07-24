@@ -173,8 +173,15 @@ class Calendar_Handler(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/html'
         user = users.get_current_user()
         template = JINJA_ENVIRONMENT.get_template('Template/Calendar.html')
-
+        # date_key = ndb.Key(urlsafe==self.request.get('date_key'))
+        # date_entry = date_key.get()
         dates=range(1,32)
+        remarkables=Remarkable.query(Remarkable.user == user, ancestor=root_parent()).fetch()
+        remarkables_dates=[]
+        for remarkable in remarkables:
+            if remarkable.date not in remarkables_dates:
+                remarkables_dates.append(remarkable.date)
+        print(remarkables_dates)
         data = {
           'user': user,
           'login_url': users.create_login_url('/'),
