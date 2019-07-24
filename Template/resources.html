@@ -21,11 +21,12 @@
         {% if user %}
         <a href="./remarkable" class="w3-bar-item w3-button w3-padding-large w3-light-blue w3-hover-pale-blue"># I am Remarkable</a>
         <a href="./calendar" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Calendar</a>
-        {% else %}
-        <a href="./" class="w3-bar-item w3-button w3-padding-large w3-light-blue w3-hover-pale-blue"># I am Remarkable</a>
-        <a href="./" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Calendar</a>
-        {% endif %}
         <a href="./diary" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Diary</a>
+        {% else %}
+        <a href="{{login_url}}" class="w3-bar-item w3-button w3-padding-large w3-light-blue w3-hover-pale-blue"># I am Remarkable</a>
+        <a href="{{login_url}}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Calendar</a>
+        <a href="{{login_url}}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Diary</a>
+        {% endif %}
         <a href="./motivation" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Motivational Quotes</a>
         <a href="./resources" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Resources</a>
         <a href="./help" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Help</a>
@@ -33,15 +34,17 @@
       </div>
       <!-- Navbar on small screens -->
       <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
-        <a href="./home" class="w3-bar-item w3-button w3-padding-large">Home</a>
         {% if user %}
+        <a href="./home" class="w3-bar-item w3-button w3-padding-large">Home</a>
         <a href="./remarkable" class="w3-bar-item w3-button w3-padding-large">#IamRemarkable</a>
         <a href="./calendar" class="w3-bar-item w3-button w3-padding-large">Calendar</a>
+        <a href="./diary" class="w3-bar-item w3-button w3-padding-large">Diary</a>
         {% else %}
+        <a href="{{login_url}}" class="w3-bar-item w3-button w3-padding-large">Home</a>
         <a href="{{login_url}}" class="w3-bar-item w3-button w3-padding-large">#IamRemarkable</a>
         <a href="{{login_url}}" class="w3-bar-item w3-button w3-padding-large">Calendar</a>
+        <a href="{{login_url}}" class="w3-bar-item w3-button w3-padding-large">Diary</a>
         {% endif %}
-        <a href="./diary" class="w3-bar-item w3-button w3-padding-large">Diary</a>
         <a href="./quotes" class="w3-bar-item w3-button w3-padding-large">Quotes</a>
         <a href="./resources" class="w3-bar-item w3-button w3-padding-large">Resources</a>
         <a href="./help" class="w3-bar-item w3-button w3-padding-large">Help</a>
@@ -103,7 +106,7 @@
           <ol>
             <li> <a href="https://www.psychologytoday.com/us/blog/what-works-and-why/201803/how-your-mental-health-reaps-the-benefits-exercise">Nike Workout app</a></li>
             <li> <a href="https://www.nike.com/us/en_us/c/nike-plus/training-app">Personalized workout app from Nike</a></li>
-            <li> <a href="https://www.popsugar.com/Workouts"></a>Personalized workouts from Popsugar</li>
+            <li> <a href="https://www.popsugar.com/Workouts">Personalized workouts from Popsugar</a></li>
           </ol>
         </div>
 
@@ -137,6 +140,6 @@
           <h1 class="w3-margin w3-xlarge"><b>Here at RemarkableBecause we want to offer our user with every type of help they need.</b></h1>
           <h2 class="w3-margin w3-xlarge">If you are looking for another resource that does not appear here, please check out our <a href="./help">Help Page</a></h2>
       </div>
-      
+
   </body>
 </html>
