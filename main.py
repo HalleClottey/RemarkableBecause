@@ -38,6 +38,7 @@ class Diary_Entry(ndb.Model):
     user = ndb.UserProperty()
     entry = ndb.StringProperty()
     date = ndb.StringProperty()
+    # counter = ndb.IntegerProperty()
 
 # This initializes the jinja2 Environment.
 # This will be the same in every app that uses the jinja2 templating library.
@@ -147,8 +148,25 @@ class New_Diary_Entry_Handler(webapp2.RequestHandler):
         new_entry.entry = self.request.get('diary_post')
         new_entry.user = user
         new_entry.date = datetime.datetime.now().strftime("%B %d, %Y")
+        # new_entry.counter =
         new_entry.put()
         self.redirect('/diary')
+
+class Display_Diary_Entry_Handler(webapp2.RequestHandler):
+    def get(self): #for a get request
+        self.response.headers['Content-Type'] = 'text/html'
+        user = users.get_current_user()
+        entry_key = ndb.Key(urlsafe=self.request.get('entry_key'))
+        diary_entry = entry_key.get()
+        template = JINJA_ENVIRONMENT.get_template('Template/DisplayDiaryEntry.html')
+        data = {
+          'user': user,
+          'login_url': users.create_login_url('/'),
+          'logout_url': users.create_logout_url('/'),
+          'entry': diary_entry,
+        }
+        self.response.headers['Content-Type'] = 'text/html'
+        self.response.write(template.render(data))
 
 class Calendar_Handler(webapp2.RequestHandler):
     def get(self): #for a get request
@@ -215,13 +233,24 @@ class Remarkable_Handler(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/html'
         user = users.get_current_user()
         template = JINJA_ENVIRONMENT.get_template('Template/remarkable.html')
-        all_remarkables = Remarkable.query(ancestor=root_parent()).fetch()
+        all_remarkables = Remarkable.query(Remarkable.user == user, ancestor=root_parent()).fetch()
+        prefix = ""
+        suffix = ""
+        default_remarkables = ['I woke up today.', 'I found the energy to log onto this site.']
+        if all_remarkables:
+            my_remarkable = random.choice(all_remarkables).remarkable_because
+            prefix = "On " + datetime.datetime.now().strftime("%B %d, %Y") + ", you wrote: "
+        else:
+            my_remarkable = random.choice(default_remarkables)
+            suffix = " ~ The Remarkable Staff ~"
         data = {
           'user': user,
           'login_url': users.create_login_url('/'),
           'logout_url': users.create_logout_url('/'),
-          'i_am_remarkable_because': random.choice(all_remarkables),
+          'i_am_remarkable_because': my_remarkable,
           'today': datetime.datetime.now().strftime("%B %d, %Y"),
+          'prefix': prefix,
+          'suffix': suffix,
         }
         self.response.headers['Content-Type'] = 'text/html'
         self.response.write(template.render(data))
@@ -230,6 +259,7 @@ class Remarkable_Handler(webapp2.RequestHandler):
     def post(self):
         user = users.get_current_user()
         new_response = Remarkable(parent=root_parent())
+        new_response.user = user
         new_response.date = datetime.datetime.now().strftime("%B %d, %Y")
         new_response.remarkable_because = self.request.get('remarkable_post')
         new_response.put()
@@ -261,17 +291,33 @@ class Test_Handler(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/html'
         self.response.write(template.render(data))
 
+class Login_Handler(webapp2.RequestHandler):
+    def get(self): #for a get request
+        self.response.headers['Content-Type'] = 'text/html'
+        user = users.get_current_user()
+        template = JINJA_ENVIRONMENT.get_template('Template/login.html')
+        data = {
+          'user': user,
+          'login_url': users.create_login_url('/'),
+          'logout_url': users.create_logout_url('/'),
+        }
+        self.response.headers['Content-Type'] = 'text/html'
+        self.response.write(template.render(data))
+
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/home', MainPageUser),
-    ('/resources',Resources_Handler),
-    ('/motivation',Quotes_Handler),
-    ('/diary',Diary_Handler),
-    ('/diaryentry',New_Diary_Entry_Handler),
-    ('/calendar',Calendar_Handler),
-    ('/remarkable',Remarkable_Handler),
-    ('/help',Help_Handler),
-    ('/thankyou',Thank_You_Handler),
-    ('/test', Test_Handler)
+    ('/resources', Resources_Handler),
+    ('/motivation', Quotes_Handler),
+    ('/diary', Diary_Handler),
+    ('/diaryentry', New_Diary_Entry_Handler),
+    ('/display_diary_entry', Display_Diary_Entry_Handler),
+    ('/calendar', Calendar_Handler),
+    ('/remarkable', Remarkable_Handler),
+    ('/help', Help_Handler),
+    ('/thankyou', Thank_You_Handler),
+    ('/test', Test_Handler),
+    ('/login', Login_Handler)
+
 ], debug=True)
