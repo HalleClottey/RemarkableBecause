@@ -167,6 +167,7 @@ class Remarkable_Handler(webapp2.RequestHandler):
     def post(self):
         user = users.get_current_user()
         new_response = Remarkable(parent=root_parent())
+        new_response.user = user
         new_response.date = datetime.datetime.now().strftime("%B %d, %Y")
         new_response.remarkable_because = self.request.get('remarkable_post')
         new_response.put()
