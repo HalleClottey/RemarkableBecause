@@ -4,7 +4,9 @@ import os
 from google.appengine.api import urlfetch
 import json
 from google.appengine.api import users
+import random
 from google.appengine.ext import ndb
+import datetime
 # import api_key.py
 
 def root_parent():
@@ -21,7 +23,7 @@ class Remarkable(ndb.Model):
 class Diary_Entry(ndb.Model):
     user = ndb.UserProperty()
     entry = ndb.StringProperty()
-    date = ndb.StringProperty() #Date property
+    date = ndb.StringProperty()
 
 # This initializes the jinja2 Environment.
 # This will be the same in every app that uses the jinja2 templating library.
@@ -91,6 +93,7 @@ class Diary_Handler(webapp2.RequestHandler):
           'user': user,
           'login_url': users.create_login_url('/'),
           'logout_url': users.create_logout_url('/'),
+          'entries': Diary_Entry.query(Diary_Entry.user == user, ancestor=root_parent()).fetch()
         }
         self.response.headers['Content-Type'] = 'text/html'
         self.response.write(template.render(data))
@@ -104,6 +107,8 @@ class New_Diary_Entry_Handler(webapp2.RequestHandler):
           'user': user,
           'login_url': users.create_login_url('/'),
           'logout_url': users.create_logout_url('/'),
+          'today': datetime.datetime.now().strftime("%B %d, %Y"),
+
         }
         self.response.headers['Content-Type'] = 'text/html'
         self.response.write(template.render(data))
@@ -111,6 +116,8 @@ class New_Diary_Entry_Handler(webapp2.RequestHandler):
         user = users.get_current_user()
         new_entry = Diary_Entry(parent=root_parent())
         new_entry.entry = self.request.get('diary_post')
+        new_entry.user = user
+        new_entry.date = datetime.datetime.now().strftime("%B %d, %Y")
         new_entry.put()
         self.redirect('/diary')
 
@@ -145,23 +152,25 @@ class Remarkable_Handler(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/html'
         user = users.get_current_user()
         template = JINJA_ENVIRONMENT.get_template('Template/remarkable.html')
+        all_remarkables = Remarkable.query(ancestor=root_parent()).fetch()
         data = {
           'user': user,
           'login_url': users.create_login_url('/'),
           'logout_url': users.create_logout_url('/'),
+          'i_am_remarkable_because': random.choice(all_remarkables),
+          'today': datetime.datetime.now().strftime("%B %d, %Y"),
         }
         self.response.headers['Content-Type'] = 'text/html'
         self.response.write(template.render(data))
 
+
     def post(self):
         user = users.get_current_user()
         new_response = Remarkable(parent=root_parent())
+        new_response.date = datetime.datetime.now().strftime("%B %d, %Y")
         new_response.remarkable_because = self.request.get('remarkable_post')
         new_response.put()
         self.redirect('/thankyou')
-
-
-
 
 class Thank_You_Handler(webapp2.RequestHandler):
     def get(self): #for a get request
@@ -188,7 +197,6 @@ class Test_Handler(webapp2.RequestHandler):
         }
         self.response.headers['Content-Type'] = 'text/html'
         self.response.write(template.render(data))
-
 
 
 app = webapp2.WSGIApplication([
