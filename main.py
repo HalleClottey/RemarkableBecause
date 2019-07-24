@@ -131,8 +131,42 @@ class Calendar_Handler(webapp2.RequestHandler):
           'login_url': users.create_login_url('/'),
           'logout_url': users.create_logout_url('/'),
         }
-        self.response.headers['Content-Type'] = 'text/html'
-        self.response.write(template.render(data))
+        thirty_one = {}
+        for i in range(1,32):
+            thirty_one[i] = i
+        thirty = {}
+        for i in range(1,31):
+            thirty[i] = i
+        february = {}
+        for i in range(1,29):
+            february[i] = i
+        times = "Current date: %s/%s/%s" % (datetime.datetime.now().month, datetime.datetime.now().day, datetime.datetime.now().year)
+        #dates = database.remarkable.query(database.StoredDate.username == user.nickname()).fetch()
+        date_remarkables = Remarkable.query()
+        #date_remarkables=date_remarkables.filter("user==",user.nickname())
+        user_date="may 22nd 2019"
+        #date_remarkables=date_remarkables.filter(Remarkable.date=user_date)
+        print('your user name')
+        items=date_remarkables.fetch()
+        print(items)
+        # values = {
+        #     'time': times,
+        #     #'storedDate':date,
+        #     'jan': thirty_one,
+        #     'feb': february,
+        #     'mar': thirty_one,
+        #      'apr': thirty,
+        #      'may': thirty_one,
+        #      'june': thirty,
+        #      'july': thirty_one,
+        #      'aug': thirty_one,
+        #      'sep': thirty,
+        #      'oct': thirty_one,
+        #      'nov': thirty,
+        #      'dec': thirty_one,
+        # }
+        # self.response.headers['Content-Type'] = 'text/html'
+        # self.response.write(template.render(data))
 
 class Help_Handler(webapp2.RequestHandler):
     def get(self): #for a get request
