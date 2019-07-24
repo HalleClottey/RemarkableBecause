@@ -234,16 +234,23 @@ class Remarkable_Handler(webapp2.RequestHandler):
         user = users.get_current_user()
         template = JINJA_ENVIRONMENT.get_template('Template/remarkable.html')
         all_remarkables = Remarkable.query(Remarkable.user == user, ancestor=root_parent()).fetch()
+        prefix = ""
+        suffix = ""
+        default_remarkables = ['I woke up today.', 'I found the energy to log onto this site.']
         if all_remarkables:
-            my_remarkable = random.choice(all_remarkables)
+            my_remarkable = random.choice(all_remarkables).remarkable_because
+            prefix = "On " + datetime.datetime.now().strftime("%B %d, %Y") + ", you wrote: "
         else:
-            my_remarkable = "Hello."
+            my_remarkable = random.choice(default_remarkables)
+            suffix = " ~ The Remarkable Staff ~"
         data = {
           'user': user,
           'login_url': users.create_login_url('/'),
           'logout_url': users.create_logout_url('/'),
           'i_am_remarkable_because': my_remarkable,
           'today': datetime.datetime.now().strftime("%B %d, %Y"),
+          'prefix': prefix,
+          'suffix': suffix,
         }
         self.response.headers['Content-Type'] = 'text/html'
         self.response.write(template.render(data))
