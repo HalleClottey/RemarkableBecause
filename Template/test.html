@@ -40,8 +40,8 @@
     <a href="./remarkable" class="w3-bar-item w3-button w3-padding-large">#IamRemarkable</a>
     <a href="./calendar" class="w3-bar-item w3-button w3-padding-large">Calendar</a>
     {% else %}
-    <a href="./" class="w3-bar-item w3-button w3-padding-large">#IamRemarkable</a>
-    <a href="./" class="w3-bar-item w3-button w3-padding-large">Calendar</a>
+    <a href="{{login_url}}" class="w3-bar-item w3-button w3-padding-large">#IamRemarkable</a>
+    <a href="{{login_url}}" class="w3-bar-item w3-button w3-padding-large">Calendar</a>
     {% endif %}
     <a href="./diary" class="w3-bar-item w3-button w3-padding-large">Diary</a>
     <a href="./quotes" class="w3-bar-item w3-button w3-padding-large">Quotes</a>
@@ -54,8 +54,8 @@
 <!-- Header -->
 <header class="w3-container w3-pale-blue w3-center" style="padding:128px 16px">
   <h1 class="w3-margin w3-jumbo"># I AM REMARKABLE</h1>
-  <p class="w3-xlarge">What makes <b>ME</b> remarkable?</p>
-  <a href="./remarkable"><button class="w3-button w3-black w3-padding-large w3-large w3-margin-top w3-hover-light-blue">Get Started</button></a>
+  <p class="w3-xlarge">Please sign in for a personal experience!</p>
+  <a href="{{login_url}}"><button class="w3-button w3-black w3-padding-large w3-large w3-margin-top w3-hover-light-blue">Sign in with Email</button></a>
 </header>
 
 <!-- First Grid (Purpose) -->
@@ -103,7 +103,7 @@
     </div>
 
     <div class="w3-third w3-center">
-      <a href="./diary"><i class="fa fa-book w3-padding-64 w3-text-light-blue"></i></a>
+      <i class="fa fa-book w3-padding-64 w3-text-light-blue"></i>
     </div>
   </div>
 </div>
