@@ -156,6 +156,7 @@ class Remarkable_Handler(webapp2.RequestHandler):
           'login_url': users.create_login_url('/'),
           'logout_url': users.create_logout_url('/'),
           'i_am_remarkable_because': random.choice(all_remarkables),
+          'today': datetime.datetime.now().strftime("%B %d, %Y"),
         }
         self.response.headers['Content-Type'] = 'text/html'
         self.response.write(template.render(data))
