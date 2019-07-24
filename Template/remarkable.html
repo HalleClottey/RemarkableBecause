@@ -2,7 +2,14 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Why am I Remarkable?</title>
+    <title>Why Am I Remarkable?</title>
+    <html lang="en" dir="ltr">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <script type="text/javascript">
     function Visible() {
       const x = document.getElementById("motivational_display");
@@ -13,11 +20,18 @@
       }
     }
     </script>
+<style>
+    body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+    .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+    .fa-heart,.fa-calendar, .fa-book {font-size:200px}
+    </style>
+
+
   </head>
 
   {% if user %}
     <body>
-      <a href = "./home"> Home </a>
+      <!-- <a href = "./home"> Home </a>
       <a href = "./remarkable"> #I Am Remarkable </a>
       <a href="./resources">Resources</a>
       <a href="./motivation">Quotes</a>
@@ -25,58 +39,70 @@
       <a href="./calendar">Calendar</a>
       <a href="./help">Help</a>
       <a href="{{logout_url}}">Logout</a>
-      <h1>I am remarkable because...</h1>
+      <h1>I am remarkable because...</h1> -->
 
+      <div class="w3-top">
+        <div class="w3-bar w3-light-blue w3-card w3-left-align w3-large">
+          <!-- <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-pale-blue w3-large w3-light-blue" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a> -->
+          <a href="./home" class="w3-bar-item w3-button w3-padding-large w3-light-blue w3-hover-pale-blue">Home</a>
+          {% if user %}
+          <a href="./remarkable" class="w3-bar-item w3-button w3-padding-large w3-light-blue w3-hover-pale-blue"># I am Remarkable</a>
+          <a href="./calendar" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Calendar</a>
+          <a href="./diary" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Diary</a>
+          {% else %}
+          <a href="./" class="w3-bar-item w3-button w3-padding-large w3-light-blue w3-hover-pale-blue"># I am Remarkable</a>
+          <a href="./" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Calendar</a>
+          <a href="./" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Diary</a>
+          {% endif %}
+          <a href="./motivation" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Motivational Quotes</a>
+          <a href="./resources" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Resources</a>
+          <a href="./help" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Help</a>
+          <a href="{{logout_url}}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue w3-margin-right">Log Out</a>
+        </div>
+        <!-- Navbar on small screens -->
+        <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
+          <a href="./home" class="w3-bar-item w3-button w3-padding-large">Home</a>
+          {% if user %}
+          <a href="./remarkable" class="w3-bar-item w3-button w3-padding-large">#IamRemarkable</a>
+          <a href="./calendar" class="w3-bar-item w3-button w3-padding-large">Calendar</a>
+          {% else %}
+          <a href="./" class="w3-bar-item w3-button w3-padding-large">#IamRemarkable</a>
+          <a href="./" class="w3-bar-item w3-button w3-padding-large">Calendar</a>
+          {% endif %}
+          <a href="./diary" class="w3-bar-item w3-button w3-padding-large">Diary</a>
+          <a href="./quotes" class="w3-bar-item w3-button w3-padding-large">Quotes</a>
+          <a href="./resources" class="w3-bar-item w3-button w3-padding-large">Resources</a>
+          <a href="./help" class="w3-bar-item w3-button w3-padding-large">Help</a>
+        </div>
+      </div>
+
+<br></br>
+<br></br>
+<br></br>
       <!-- Text box for whay makes you remarkable? -->
-      <form class="" action="/remarkable" method="Post">
+      <center><form class="" action="/remarkable" method="Post">
         <textarea type="text" name="remarkable_post" value="" placeholder="What makes you remarkable?" style = "width:450px; height:150px;font-size:18pt;"></textarea>
         <input action ="/thankyou" type="submit" name="" value="Submit">  <!-- Submit button -->
-      </form>
-
-  <!-- <script type="text/javascript" src="/js/main.js"></script> inside scripts tag-->
+      </form></center>
 
       <!-- Displays current date -->
-          <!-- <p><script> document.write(new Date().toLocaleDateString()); </script></p> -->
+      <center>
           <div class="">
             Today is {{today}}
           </div>
+        </center>
 
+        <center>
       <!-- Why am I remarkable? button -->
-      <!-- <form method="Get" action="/remarkable">
-        <input onclick = "window.location.href = /home" type="submit" name="" value="Why am I remarkable?">
-      </form> -->
-      <!-- <div class="boxed">
-          This text is enclosed in a box.
-      </div> -->
-      <!-- <form method="Get" action="/remarkable">
-        <input onclick = "window.location.href = /home" type="submit" name="" value="">
-      </form> -->
-
       <button onclick = "Visible()" type="submit" name="button">Why am I remarkable?</button>
-
         <div id ="motivational_display" style = "display: none;" >
-          On {{i_am_remarkable_because.date}}, you wrote: I am remarkable because {{i_am_remarkable_because.remarkable_because}}
-        </div>
-
-  <!-- <textarea type="text" name="" style = "width:450px; height:150px;font-size:18pt;"></textarea> -->
-
-
-      <!-- Allows user to select year and date: -->
-      <!-- <input type='date' id='hasta' value='<?php echo date('Y-m-d');?> -->
-
+          {{prefix}}I am remarkable because {{i_am_remarkable_because}}{{suffix}}
+        </div></center>
     </body>
 
-  {% else %}
-  <body>
-    <a href = "./home"> Home </a>
-    <a href = "./remarkable"> #I Am Remarkable </a>
-    <a href="./resources">Resources</a>
-    <a href="./motivation">Quotes</a>
-    <a href="./diary">Diary</a>
-    <a href="./calendar">Calendar</a>
-    <a href="./help">Help</a>
-    <a href="{{login_url}}">Log in</a>
-    <h2>Please log-in for a personal experience!</h2>
-    <a href="{{login_url}}">Log in</a>
-  {% endif %}
+    {% else %}
+    <script type="text/javascript">
+      window.location = "/login"
+    </script>
+    {% endif %}
 </html>
