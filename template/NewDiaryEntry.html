@@ -17,7 +17,10 @@
 
     <h2>Welcome!</h2>
     <!-- Displays current date -->
-    <p><script> document.write(new Date().toLocaleDateString()); </script></p>
+    <!-- <p><script> document.write(new Date().toLocaleDateString()); </script></p> -->
+    <div class="">
+      Today is {{today}}
+    </div>
 
     <form class="" action="/diaryentry" method="Post">
       <textarea type="text" name="diary_post" value="" placeholder="How are you feeling toady?" style = "width:650px; height:350px;font-size:14pt;"></textarea>
