@@ -107,6 +107,8 @@ class New_Diary_Entry_Handler(webapp2.RequestHandler):
           'user': user,
           'login_url': users.create_login_url('/'),
           'logout_url': users.create_logout_url('/'),
+          'today': datetime.datetime.now().strftime("%B %d, %Y"),
+
         }
         self.response.headers['Content-Type'] = 'text/html'
         self.response.write(template.render(data))
