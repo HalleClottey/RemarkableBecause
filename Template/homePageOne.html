@@ -19,20 +19,28 @@
 <div class="w3-top">
   <div class="w3-bar w3-light-blue w3-card w3-left-align w3-large">
     <!-- <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-pale-blue w3-large w3-light-blue" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a> -->
-    <a href="./home" class="w3-bar-item w3-button w3-padding-large w3-light-blue w3-hover-pale-blue">Home</a>
     {% if user %}
-    <a href="./remarkable" class="w3-bar-item w3-button w3-padding-large w3-light-blue w3-hover-pale-blue"># I am Remarkable</a>
-    <a href="./calendar" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Calendar</a>
-    <a href="./diary" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Diary</a>
+      <a href="./home" class="w3-bar-item w3-button w3-padding-large w3-light-blue w3-hover-pale-blue">Home</a>
+      <script type="text/javascript">
+        window.location = "/home"
+      </script>
     {% else %}
-    <a href="./" class="w3-bar-item w3-button w3-padding-large w3-light-blue w3-hover-pale-blue"># I am Remarkable</a>
-    <a href="./" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Calendar</a>
-      <a href="./" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Diary</a>
+      <a href="./" class="w3-bar-item w3-button w3-padding-large w3-light-blue w3-hover-pale-blue">Home</a>
     {% endif %}
-    <a href="./motivation" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Motivational Quotes</a>
-    <a href="./resources" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Resources</a>
-    <a href="./help" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Help</a>
-    <a href="{{logout_url}}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue w3-margin-right">Log Out</a>
+
+      <a href="./remarkable" class="w3-bar-item w3-button w3-padding-large w3-light-blue w3-hover-pale-blue"># I am Remarkable</a>
+      <a href="./calendar" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Calendar</a>
+      <a href="./diary" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Diary</a>
+      <a href="./motivation" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Motivational Quotes</a>
+      <a href="./resources" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Resources</a>
+      <a href="./help" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Help</a>
+
+    {%if user %}
+      <a href="{{logout_url}}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue w3-margin-right">Log Out</a>
+    {% else %}
+      <a href="{{login_url}}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue w3-margin-right">Log In</a>
+    {% endif %}
+
   </div>
   <!-- Navbar on small screens -->
   <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
@@ -113,7 +121,7 @@
 <!-- Quote of Day -->
 <div class="w3-container w3-black w3-center w3-opacity w3-padding-64">
     <h1 class="w3-margin w3-xlarge"><b>Quote of the day</b></h1>
-    <h2 class="w3-margin w3-xlarge">"fsdsfa"</h2>
+    <h2 class="w3-margin w3-xlarge">"Be happy."</h2>
 </div>
 
 <footer class="w3-container w3-padding-64 w3-center w3-opacity">
