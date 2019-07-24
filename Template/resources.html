@@ -1,53 +1,142 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Resources</title>
-  </head>
+  <title>Resources</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+    .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+    .fa-heart,.fa-smile-o, .fa-trophy, .fa-cutlery {font-size:200px}
+  </style>
+
   <body>
-    <a href = "./home"> Home </a>
-    <a href = "./remarkable"> #I Am Remarkable </a>
-    <a href="./resources">Resources</a>
-    <a href="./motivation">Quotes</a>
-    <a href="./diary">Diary</a>
-    <a href="./calendar">Calendar</a>
-    <a href="./help">Help</a>
-    <a href="{{logout_url}}">Logout</a>
-    <h1>Resources</h1>
-    <h2>On this page our users will find a complete guide to a wellness lifestyle </h2>
-    <h2>First key to a healthy lifestyle: Battling Anxiety and Stress</h2>
-    <h3> 40 million americans deal with anxiety today. In a healthy lifestyle, one must be able to manage the highlevel stress environments they find themselves in. </h2>
-      <h4> <a href="https://www.mentalhealthfirstaid.org/external/2018/06/stress-vs-anxiety/"></a> offers a detailed explanation on the significant differences between stress and anxiety.</h4>
-    <ol>
-      <li> <a href="https://www.themuse.com/advice/5-different-types-of-imposter-syndrome-and-5-ways-to-battle-each-one"> click here for Imposter Syndrome !</a></li>
-      <li> <a href="https://www.headspace.com/blog/"></a> if you're looking to begin your path to meditation, don't look further than headspace</li>
-      <li> <a href="https://www.themuse.com/advice/5-different-types-of-imposter-syndrome-and-5-ways-to-battle-each-one">Battling Imposter Syndrome</a></li>
-      <li> <a href="https://www.umsystem.edu/totalrewards/wellness/mindfulness/mindfulness_practices">Guided Mindfulness Practices</a></li>
-      <li> <a href="https://www.researchforwellness.com/mindfulness-resources">More Mindfulness Resources</a></li>
-    </ol>
-    <h3>The second key is having a resiliant self-Esteem!</h3>
-    <h3>Self-Essteem is the value one brings to themselves. <a href="https://www.psychologytoday.com/us/basics/self-esteem"> Psychologytoday offers a detailed explanation of the importance of Self-Esteem</a></h3>
-    <ol>
-      <li> <a href="http://www.self-esteem-experts.com/self-esteem-worksheets.html">Self-Esteem Experts offers several worksheets sand activites to build up one'ss elf-esteem.</a> </li>
-      <li> <a href="https://www.mayoclinic.org/healthy-lifestyle/adult-health/in-depth/self-esteem/art-20047976">if you are worried of having to much self-esteem, do not look further than mayo clinic's article on Self-Esteem check</a></li>
-    </ol>
-    <h3>The third key is physical activity. In order to maintain a strong mind one requires a strong body !</h3>
-    <ol>
-      <li> <a href="https://www.nike.com/us/en_us/c/nike-plus/training-app">
-        Nike offers a very simple application to it's user with several different workout plans
-        tailored to each user!</a>
-      </li>
-      <li> <a href="https://www.popsugar.com/Workouts"></a> Popsugar offers a similar experience to Nike user.</li>
-      <li> <a href="https://www.fitbit.com/home?utm_source=&utm_medium=paidsearch&gclid=CLKUzJC0y-MCFa2uZQod3ywEfQ"> A fitbit is a viable option to keep track of one's health at all times </a> </li>
-    </ol>
-    <h3> The last key which is the best of the best is FOOD!! </h3>
-    <h4>ladies and gentlemen we are living in 2019, gone with cow milk in with almond,oat,cocunut, cashew, soy milk!!</h4>
-    <ol>
-      <li> <a href="http://www.eatingwell.com/recipes/"> eatingwell offerss user a variety of healthy food options that are extremly tasty !</a> </li>
-      <li> <a href="https://www.hellofresh.com/"> Here at 75% of our staff use hello fresh a healthy reliable and safe food delivery service </a> </li>
-    </ol>
-    <h5> Here at Remarkablebecause we want to offer our user with every type of help you need.
-      If you are looking for another resource that doess not appear here,
-      please check out our Help page. <a href="./help"> <button type="button">Help Page !</button>  </a> </h5>
+    <div class="w3-top">
+      <div class="w3-bar w3-light-blue w3-card w3-left-align w3-large">
+        <!-- <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-pale-blue w3-large w3-light-blue" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a> -->
+        <a href="./home" class="w3-bar-item w3-button w3-padding-large w3-light-blue w3-hover-pale-blue">Home</a>
+        {% if user %}
+        <a href="./remarkable" class="w3-bar-item w3-button w3-padding-large w3-light-blue w3-hover-pale-blue"># I am Remarkable</a>
+        <a href="./calendar" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Calendar</a>
+        {% else %}
+        <a href="./" class="w3-bar-item w3-button w3-padding-large w3-light-blue w3-hover-pale-blue"># I am Remarkable</a>
+        <a href="./" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Calendar</a>
+        {% endif %}
+        <a href="./diary" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Diary</a>
+        <a href="./motivation" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Motivational Quotes</a>
+        <a href="./resources" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Resources</a>
+        <a href="./help" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Help</a>
+        <a href="{{logout_url}}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue w3-margin-right">Log Out</a>
+      </div>
+      <!-- Navbar on small screens -->
+      <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
+        <a href="./home" class="w3-bar-item w3-button w3-padding-large">Home</a>
+        {% if user %}
+        <a href="./remarkable" class="w3-bar-item w3-button w3-padding-large">#IamRemarkable</a>
+        <a href="./calendar" class="w3-bar-item w3-button w3-padding-large">Calendar</a>
+        {% else %}
+        <a href="{{login_url}}" class="w3-bar-item w3-button w3-padding-large">#IamRemarkable</a>
+        <a href="{{login_url}}" class="w3-bar-item w3-button w3-padding-large">Calendar</a>
+        {% endif %}
+        <a href="./diary" class="w3-bar-item w3-button w3-padding-large">Diary</a>
+        <a href="./quotes" class="w3-bar-item w3-button w3-padding-large">Quotes</a>
+        <a href="./resources" class="w3-bar-item w3-button w3-padding-large">Resources</a>
+        <a href="./help" class="w3-bar-item w3-button w3-padding-large">Help</a>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header class="w3-container w3-pale-blue w3-center" style="padding:128px 16px">
+      <h1 class="w3-margin w3-xxxlarge">Resources Page</h1>
+      <p class="w3-xlarge">Your guide to confidence, self-affirmation, and self-realization</p>
+    </header>
+
+    <!-- First Grid -->
+    <div class="w3-row-padding w3-padding-64 w3-container">
+      <div class="w3-content">
+        <div class="w3-twothird">
+          <h1>The first key to a healthy lifestyle: Battling Anxiety and Stress</h1>
+          <h5 class="w3-padding-3">In today's society, the stress level of individuals has reached an all time high, and many people struggle with realizing their self-worth.
+            By helping our users remind themselves of their accomplishments, big or small, we hope to empower them in all aspects of life.</h5>
+          <h5 class="w3-text-grey"> <a href="https://www.mentalhealthfirstaid.org/external/2018/06/stress-vs-anxiety/">The difference between stress and anxiety</h5></a>
+          <ol>
+            <li> <a href="https://www.themuse.com/advice/5-different-types-of-imposter-syndrome-and-5-ways-to-battle-each-one">Battling Imposter Syndrome</a></li>
+            <li> <a href="https://www.umsystem.edu/totalrewards/wellness/mindfulness/mindfulness_practices">Guided Mindfulness Practices</a></li>
+            <li> <a href="https://www.researchforwellness.com/mindfulness-resources">More Mindfulness Resources</a></li>
+          </ol>
+        </div>
+        <div class="w3-third w3-center">
+          <i class="fa fa-heart w3-padding-64 w3-text-light-blue"></i>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Second Grid (Self Esteem) -->
+    <div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
+      <div class="w3-content">
+        <div class="w3-third w3-center">
+          <i class="fa fa-smile-o w3-padding-64 w3-text-light-blue w3-margin-right"></i>
+        </div>
+        <div class="w3-twothird">
+          <h1>The second key is having resilient self-esteem</h1>
+          <h5 class="w3-padding-3">Healthy self-esteem allows individuals to live to their full potential.</h5>
+          <h5 class="w3-text-grey"><a href="https://www.psychologytoday.com/us/basics/self-esteem">Information about Self-Esteem</a></h5>
+          <ol>
+            <li> <a href="https://www.mentalhelp.net/self-esteem/why-its-important/">Why self-esteem is important</a></li>
+            <li> <a href="http://www.self-esteem-experts.com/self-esteem-worksheets.html">Worksheets & activites to build up self-esteem.</a></li>
+            <li> <a href="https://www.mayoclinic.org/healthy-lifestyle/adult-health/in-depth/self-esteem/art-20047976">Self-Esteem Check</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- Third Grid (Fitness) -->
+    <div class="w3-row-padding w3-padding-64 w3-container">
+      <div class="w3-content">
+        <div class="w3-twothird">
+          <h1>The third key is physical activity</h1>
+          <h5 class="w3-padding-32">Exercise helps not only your body, but also your mind!</h5>
+          <ol>
+            <li> <a href="https://www.psychologytoday.com/us/blog/what-works-and-why/201803/how-your-mental-health-reaps-the-benefits-exercise">Nike Workout app</a></li>
+            <li> <a href="https://www.nike.com/us/en_us/c/nike-plus/training-app">Personalized workout app from Nike</a></li>
+            <li> <a href="https://www.popsugar.com/Workouts"></a>Personalized workouts from Popsugar</li>
+          </ol>
+        </div>
+
+        <div class="w3-third w3-center">
+          <i class="fa fa-trophy w3-padding-64 w3-text-light-blue"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fourth Grid (Food) -->
+    <div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
+      <div class="w3-content">
+        <div class="w3-third w3-center">
+          <i class="fa fa-cutlery w3-padding-64 w3-text-light-blue w3-margin-right"></i>
+        </div>
+        <div class="w3-twothird">
+          <h1>And don't forget the importance of Food!</h1>
+          <h5 class="w3-padding-3">Your <a href="https://www.psychologytoday.com/us/blog/real-healing/201301/healthy-gut-healthy-mind-5-foods-improve-mental-health">gut and your brain are closely connected</a>, and what goes in your stomach has a big influence on your mood.</h5>
+          <h5 class="w3-text-grey"><a href="https://www.psychologytoday.com/us/basics/self-esteem">Information about Self-Esteem</a></h5>
+          <ol>
+            <li> <a href="https://www.mentalhealthamerica.net/conditions/healthy-diet-eating-mental-health-mind">Food tips for better mental health</a></li>
+            <li> <a href="http://www.eatingwell.com/recipes/">A variety of healthy food options that are also extremly tasty!</a> </li>
+            <li> <a href="https://www.hellofresh.com/">Get meals delivered to your home</a> </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- footer -->
+      <div class="w3-container w3-black w3-center w3-opacity w3-padding-64">
+          <h1 class="w3-margin w3-xlarge"><b>Here at RemarkableBecause we want to offer our user with every type of help they need.</b></h1>
+          <h2 class="w3-margin w3-xlarge">If you are looking for another resource that does not appear here, please check out our <a href="./help">Help Page</a></h2>
+      </div>
+
   </body>
 </html>
