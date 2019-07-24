@@ -17,7 +17,17 @@
   <body>
     <h1>Calendar</h1>
     <!-- Allows user to select year and date: -->
-    <input type='date' id='hasta' value='<?php echo date('Y-m-d');>
+    <!--<input type='date' id='hasta' value='<?php echo date("Y-m-d");>-->
+    <h2> {{dates}} </h2>
+    {%for date in dates %}
+    <tr>
+       {%if date==%}
+      <a href="google.com">{{date}}</a>
+      {%else%}
+      {{date}}
+      {%endif%}
+    </tr>
+    {%endfor%}
   </body>
 
   {% else %}
