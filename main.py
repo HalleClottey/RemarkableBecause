@@ -268,6 +268,19 @@ class Test_Handler(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/html'
         self.response.write(template.render(data))
 
+class Login_Handler(webapp2.RequestHandler):
+    def get(self): #for a get request
+        self.response.headers['Content-Type'] = 'text/html'
+        user = users.get_current_user()
+        template = JINJA_ENVIRONMENT.get_template('Template/login.html')
+        data = {
+          'user': user,
+          'login_url': users.create_login_url('/'),
+          'logout_url': users.create_logout_url('/'),
+        }
+        self.response.headers['Content-Type'] = 'text/html'
+        self.response.write(template.render(data))
+
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
@@ -280,5 +293,7 @@ app = webapp2.WSGIApplication([
     ('/remarkable',Remarkable_Handler),
     ('/help',Help_Handler),
     ('/thankyou',Thank_You_Handler),
-    ('/test', Test_Handler)
+    ('/test', Test_Handler),
+    ('/login', Login_Handler)
+
 ], debug=True)
