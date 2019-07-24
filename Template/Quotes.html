@@ -1,5 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+<script>
+function changeImage()
+{
+var img = document.getElementById("image");
+img.src="{{message[0].media}}";
+return false;
+}
+
+</script>
+
+<style>
+body{
+   background-color: powderblue;
+}
+h1{
+  font-family: 'Lato', sans-serif;
+  text-shadow: 2px 2px #c5f2f7;
+}
+
+</style>
   <head>
     <meta charset="utf-8">
     <title>Motivational Quotes</title>
@@ -27,5 +47,15 @@
       <a href="{{logout_url}}">Login</a>
       <h1>Motivational Quotes</h1>
     {% endif %}
+
+  <center><h1>Click here to feel inspired</h1></center>
+  <center><img src = "{{message[0].media}}" class = "cent"> </center>
+
+
+  <center>
+  <form action="" method="post">
+  <input type="submit" name="New Quote" value="New Quote">  </input>
+  </form>
+
   </body>
 </html>
