@@ -33,51 +33,21 @@
         <input action ="/thankyou" type="submit" name="" value="Submit">  <!-- Submit button -->
       </form>
 
-  <!-- <script type="text/javascript" src="/js/main.js"></script> inside scripts tag-->
-
       <!-- Displays current date -->
-          <!-- <p><script> document.write(new Date().toLocaleDateString()); </script></p> -->
           <div class="">
             Today is {{today}}
           </div>
 
       <!-- Why am I remarkable? button -->
-      <!-- <form method="Get" action="/remarkable">
-        <input onclick = "window.location.href = /home" type="submit" name="" value="Why am I remarkable?">
-      </form> -->
-      <!-- <div class="boxed">
-          This text is enclosed in a box.
-      </div> -->
-      <!-- <form method="Get" action="/remarkable">
-        <input onclick = "window.location.href = /home" type="submit" name="" value="">
-      </form> -->
-
       <button onclick = "Visible()" type="submit" name="button">Why am I remarkable?</button>
-
         <div id ="motivational_display" style = "display: none;" >
-          On {{i_am_remarkable_because.date}}, you wrote: I am remarkable because {{i_am_remarkable_because.remarkable_because}}
+          {{prefix}}I am remarkable because {{i_am_remarkable_because}}{{suffix}}
         </div>
-
-  <!-- <textarea type="text" name="" style = "width:450px; height:150px;font-size:18pt;"></textarea> -->
-
-
-      <!-- Allows user to select year and date: -->
-      <!-- <input type='date' id='hasta' value='<?php echo date('Y-m-d');?> -->
-
     </body>
 
     {% else %}
-    <body>
-      <a href = "./"> Home </a>
-      <a href = "./remarkable"> #I Am Remarkable </a>
-      <a href="./resources">Resources</a>
-      <a href="./motivation">Quotes</a>
-      <a href="./diary">Diary</a>
-      <a href="./calendar">Calendar</a>
-      <a href="./help">Help</a>
-      <a href="{{login_url}}">Log in</a>
-      <h2>Please log-in for a personal experience!</h2>
-      <a href="{{login_url}}">Log in</a>
-    </body>
+    <script type="text/javascript">
+      window.location = "/login"
+    </script>
     {% endif %}
 </html>
