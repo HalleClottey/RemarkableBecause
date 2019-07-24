@@ -34,8 +34,6 @@ h1{
       <a href="./calendar">Calendar</a>
       <a href="./help">Help</a>
       <a href="{{logout_url}}">Logout</a>
-      <h1>Motivational Quotes</h1>
-
     {% else %}
       <a href = "./"> Home </a>
       <a href = "./remarkable"> #I Am Remarkable </a>
@@ -45,8 +43,9 @@ h1{
       <a href="./calendar">Calendar</a>
       <a href="./help">Help</a>
       <a href="{{logout_url}}">Login</a>
-      <h1>Motivational Quotes</h1>
     {% endif %}
+
+      <h1>Motivational Quotes</h1>
 
   <center><h1>Click here to feel inspired</h1></center>
   <center><img src = "{{message[0].media}}" class = "cent"> </center>
