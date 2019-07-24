@@ -22,6 +22,7 @@
 <!-- <script type="text/javascript" src="/js/main.js"></script> inside scripts tag-->
     {% for entry in entries %}
       <div>
+        <p>{{entries.index(entry) + 1}}</p>
         <p>{{entry.entry}}</p>
         <p>{{entry.date}}</p>
       </div>
