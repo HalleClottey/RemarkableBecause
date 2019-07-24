@@ -23,11 +23,12 @@
     {% if user %}
     <a href="./remarkable" class="w3-bar-item w3-button w3-padding-large w3-light-blue w3-hover-pale-blue"># I am Remarkable</a>
     <a href="./calendar" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Calendar</a>
+    <a href="./diary" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Diary</a>
     {% else %}
     <a href="./" class="w3-bar-item w3-button w3-padding-large w3-light-blue w3-hover-pale-blue"># I am Remarkable</a>
     <a href="./" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Calendar</a>
+      <a href="./" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Diary</a>
     {% endif %}
-    <a href="./diary" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Diary</a>
     <a href="./motivation" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Motivational Quotes</a>
     <a href="./resources" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Resources</a>
     <a href="./help" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Help</a>
@@ -39,11 +40,12 @@
     {% if user %}
     <a href="./remarkable" class="w3-bar-item w3-button w3-padding-large">#IamRemarkable</a>
     <a href="./calendar" class="w3-bar-item w3-button w3-padding-large">Calendar</a>
+    <a href="./diary" class="w3-bar-item w3-button w3-padding-large">Diary</a>
     {% else %}
     <a href="{{login_url}}" class="w3-bar-item w3-button w3-padding-large">#IamRemarkable</a>
     <a href="{{login_url}}" class="w3-bar-item w3-button w3-padding-large">Calendar</a>
+    <a href="{{login_url}}" class="w3-bar-item w3-button w3-padding-large">Diary</a>
     {% endif %}
-    <a href="./diary" class="w3-bar-item w3-button w3-padding-large">Diary</a>
     <a href="./quotes" class="w3-bar-item w3-button w3-padding-large">Quotes</a>
     <a href="./resources" class="w3-bar-item w3-button w3-padding-large">Resources</a>
     <a href="./help" class="w3-bar-item w3-button w3-padding-large">Help</a>
