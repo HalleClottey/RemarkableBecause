@@ -70,13 +70,16 @@
     <div><center><h1>Welcome!</h1>
     <div class="">
       Today is {{today}}
-    </center></div></div><br></br>
+    </center></div><br></br>
+
+      <center><form class="" action="/diaryentry" method="Post">
+      <textarea type="text" name="subject_post" value="" placeholder="Please Enter Subject" style = "width:650px; height:50px;font-size:18pt;"></textarea></center>
 
       <center><form class="" action="/diaryentry" method="Post">
       <textarea type="text" name="diary_post" value="" placeholder="How are you feeling today?" style = "width:650px; height:350px;font-size:14pt;"></textarea></center>
 
       <!--submit button -->
-      <center><input action = "/diary" type="submit" name="" value="Submit"></form></center>
+      <center><input action = "/diary" type="submit" name="" value="Submit"></center>
 
 <!--
     <form class="" action="/diaryentry" method="Post">
