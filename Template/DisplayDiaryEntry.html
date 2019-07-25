@@ -28,8 +28,16 @@
     .entry {
   width: 50%;
   padding: 5%;
-  border: 3px solid white;
+  border: 3px solid #99ccff;
   margin: 0; }
+
+  h3 {
+    color: #ccffff;
+  }
+  h3 span {
+    background-color: #99ccff;
+    padding: 2%;
+  }
     </style>
   </head>
 
@@ -72,6 +80,8 @@
 
       <div><center>
     <h1>Diary Entry - {{entry.date}}</h1><br></br>
+    <h3><span>{{entry.subject}}</span></h3>
+    <br></br>
 
     <div class="entry">
       <h4>{{entry.entry}}</h4>

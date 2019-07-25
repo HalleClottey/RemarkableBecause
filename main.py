@@ -40,6 +40,7 @@ class Diary_Entry(ndb.Model):
     user = ndb.UserProperty()
     entry = ndb.StringProperty()
     date = ndb.StringProperty()
+    subject = ndb.StringProperty()
     # counter = ndb.IntegerProperty()
 
 # This initializes the jinja2 Environment.
@@ -150,6 +151,7 @@ class New_Diary_Entry_Handler(webapp2.RequestHandler):
         new_entry.entry = self.request.get('diary_post')
         new_entry.user = user
         new_entry.date = datetime.datetime.now().strftime("%B %d, %Y")
+        new_entry.subject = self.request.get('subject_post')
         # new_entry.counter =
         new_entry.put()
         self.redirect('/diary')
