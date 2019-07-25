@@ -8,6 +8,7 @@ import random
 from google.appengine.ext import ndb
 import datetime
 import api_key
+import calendar
 
 #function to retrieve quotes from the api
 def getQuotes():
@@ -174,28 +175,39 @@ class Calendar_Handler(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/html'
         user = users.get_current_user()
         template = JINJA_ENVIRONMENT.get_template('Template/Calendar.html')
-        # date_key = ndb.Key(urlsafe==self.request.get('date_key'))
-        # date_entry = date_key.get()
-        dates=range(1,32)
+
+
+        year = datetime.datetime.now().year
+        month = datetime.datetime.now().month
         remarkables=Remarkable.query(Remarkable.user == user, ancestor=root_parent()).fetch()
         remarkables_dates=[]
+
         for remarkable in remarkables:
             if remarkable.date not in remarkables_dates:
                 remarkables_dates.append(remarkable.date)
-        print(remarkables_dates)
+
         calendar_param= self.request.get('calendar_param')
+        month_range=calendar.monthrange(year,month)
+        List_months=['january','february','march','april','may','june','july','august','september','november','december']
         data = {
           'user': user,
           'login_url': users.create_login_url('/'),
           'logout_url': users.create_logout_url('/'),
-          'dates':dates
+          'start_date': month_range[0],
+          'last_day':month_range[1],
+          'year':year,
+          'month':List_months[month-1]
         }
         self.response.headers['Content-Type'] = 'text/html'
         self.response.write(template.render(data))
 
     def post(self):
         displayDay = self.request.get('date')
-        self.redirect("/calendar_item?day=%s" % displayDay)
+        foo=datetime.datetime.strptime(displayDay,'%Y-%m-%d')
+        reformated_day=foo.strftime('%B %d, %Y')
+
+        #print(displayDay.strftime("%B %d, %Y"))
+        self.redirect("/calendar_item?day=%s" % reformated_day)
         print("hello")
 
 

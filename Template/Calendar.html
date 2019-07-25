@@ -21,23 +21,40 @@
     {% endif %}
   </body>
     <h1>Calendar</h1>
-    <!-- Allows user to select year and date: -->
-    <!--<input type='date' id='hasta' value='<?php echo date("Y-m-d");>-->
-    <h2> {{dates}} </h2>
-    {%for date in dates %}
-    <tr>
-       {%if date==5%}
-      <a href="/calendar?calendar_param={{date}}">{{date}}</a>
-      {%else%}
-      {{date}}
-      {%endif%}
-    </tr>
-    {%endfor%}
     <form method="post">
-      <div>Date: <input name="date" value="{{Date}}"></div>
+      <div>Date: <input name='date' type='date' id='hasta'> <!--input name="date" value="{{Date}}"></div>-->
       <input type="submit">
     </form>
     <h5>please enter date in this format: "July 24, 2019", thank you !</h5>
+    <h3>{{month}} {{year}} </h3>
+
+    <table>
+      <tr>
+        <td>M</td>
+        <td>T</td>
+        <td>W</td>
+        <td>TH</td>
+        <td>F</td>
+        <td>S</td>
+        <td>S</td>
+      </tr>
+      <tr>
+        {% for i in range(start_date)%}
+          <td></td>
+        {%endfor%}
+        {% set count=start_date%}
+        {%for i in range(1, last_day+1)%}
+          <td> {{i}}</td>
+          {%set count= count+1 %}
+          {% if count==7%}
+            {%set count = 0%}
+            </tr>
+          {%endif%}
+      {%endfor%}
+
+
+
+    </table>
   </body>
 
 </html>
