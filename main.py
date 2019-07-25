@@ -223,7 +223,7 @@ class Remarkable_Handler(webapp2.RequestHandler):
             my_remarkable_date = my_remarkable.date
             prefix = "On " + my_remarkable_date + ", you wrote: "
         else:
-            my_remarkable = random.choice(default_remarkables)
+            my_remarkable_response = random.choice(default_remarkables)
             suffix = " ~ The Remarkable Staff ~"
         data = {
           'user': user,
