@@ -177,20 +177,20 @@ class Calendar_Handler(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/html'
         user = users.get_current_user()
         template = JINJA_ENVIRONMENT.get_template('Template/Calendar.html')
-
-
         year = datetime.datetime.now().year
         month = datetime.datetime.now().month
         remarkables=Remarkable.query(Remarkable.user == user, ancestor=root_parent()).fetch()
         remarkables_dates=[]
 
         for remarkable in remarkables:
-            if remarkable.date not in remarkables_dates:
-                remarkables_dates.append(remarkable.date)
-
+            if remarkable.real_date is not None:
+                if remarkable.real_date.year == year and remarkable.real_date.month==month:
+                    if remarkable.real_date not in remarkables_dates:
+                        remarkables_dates.append(remarkable.real_date.day)
+        print(remarkables_dates)
         calendar_param= self.request.get('calendar_param')
         month_range=calendar.monthrange(year,month)
-        List_months=['january','february','march','april','may','june','july','august','september','november','december']
+        List_months=['January','February','March','April','May','June','July','August','September','November','December']
         data = {
           'user': user,
           'login_url': users.create_login_url('/'),
@@ -198,7 +198,8 @@ class Calendar_Handler(webapp2.RequestHandler):
           'start_date': month_range[0],
           'last_day':month_range[1],
           'year':year,
-          'month':List_months[month-1]
+          'month':List_months[month-1],
+          'remarkables_dates':remarkables_dates
         }
         self.response.headers['Content-Type'] = 'text/html'
         self.response.write(template.render(data))
