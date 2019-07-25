@@ -44,11 +44,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         <!-- <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-pale-blue w3-large w3-light-blue" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a> -->
         {% if user %}
         <a href="./home" class="w3-bar-item w3-button w3-padding-large w3-light-blue w3-hover-pale-blue">Home</a>
-
         <a href="./remarkable" class="w3-bar-item w3-button w3-padding-large w3-light-blue w3-hover-pale-blue"># I am Remarkable</a>
         <a href="./calendar" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Calendar</a>
         <a href="./diary" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Diary</a>
-        <a href="{{logout_url}}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue w3-margin-right">Log Out</a>
         <a href="./motivation" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Motivational Quotes</a>
         <a href="./resources" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Resources</a>
         <a href="./help" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Help</a>
@@ -80,6 +78,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         <a href="./motivation" class="w3-bar-item w3-button w3-padding-large">Quotes</a>
         <a href="./resources" class="w3-bar-item w3-button w3-padding-large">Resources</a>
         <a href="./help" class="w3-bar-item w3-button w3-padding-large">Help</a>
+        {%if user %}
+        <a href="{{logout_url}}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue w3-margin-right">Log Out</a>
+        {% else %}
+        <a href="{{login_url}}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue w3-margin-right">Log In</a>
+        {% endif %}
       </div>
     </div>
 
