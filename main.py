@@ -212,10 +212,16 @@ class Remarkable_Handler(webapp2.RequestHandler):
         all_remarkables = Remarkable.query(Remarkable.user == user, ancestor=root_parent()).fetch()
         prefix = ""
         suffix = ""
-        default_remarkables = ['I woke up today.', 'I found the energy to log onto this site.']
+        today = ""
+        my_remarkable_response = ""
+        my_remarkable_date = ""
+        default_remarkables = ['I woke up today.', 'I found the energy to log onto this site.', 'I am flawless.', 'I woke up like this.', 'I am beautiful!']
         if all_remarkables:
-            my_remarkable = random.choice(all_remarkables).remarkable_because
-            prefix = "On " + datetime.datetime.now().strftime("%B %d, %Y") + ", you wrote: "
+            #Can also use my_remarkable.PROPERTY to retrieve any property from Remarkable class
+            my_remarkable = random.choice(all_remarkables)
+            my_remarkable_response = my_remarkable.remarkable_because
+            my_remarkable_date = my_remarkable.date
+            prefix = "On " + my_remarkable_date + ", you wrote: "
         else:
             my_remarkable = random.choice(default_remarkables)
             suffix = " ~ The Remarkable Staff ~"
@@ -223,7 +229,7 @@ class Remarkable_Handler(webapp2.RequestHandler):
           'user': user,
           'login_url': users.create_login_url('/'),
           'logout_url': users.create_logout_url('/'),
-          'i_am_remarkable_because': my_remarkable,
+          'i_am_remarkable_because': my_remarkable_response,
           'today': datetime.datetime.now().strftime("%B %d, %Y"),
           'prefix': prefix,
           'suffix': suffix,
