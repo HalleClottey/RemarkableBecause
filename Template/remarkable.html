@@ -24,26 +24,12 @@
     body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
     .fa-heart,.fa-calendar, .fa-book {font-size:200px}
-    body {
-      background_color: powderblue;
-    }
+    body { background-color: #ccffff; }
     </style>
-
-
   </head>
 
   {% if user %}
     <body>
-      <!-- <a href = "./home"> Home </a>
-      <a href = "./remarkable"> #I Am Remarkable </a>
-      <a href="./resources">Resources</a>
-      <a href="./motivation">Quotes</a>
-      <a href="./diary">Diary</a>
-      <a href="./calendar">Calendar</a>
-      <a href="./help">Help</a>
-      <a href="{{logout_url}}">Logout</a>
-      <h1>I am remarkable because...</h1> -->
-
       <div class="w3-top">
         <div class="w3-bar w3-light-blue w3-card w3-left-align w3-large">
           <!-- <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-pale-blue w3-large w3-light-blue" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a> -->
@@ -79,28 +65,25 @@
         </div>
       </div>
 
-<br></br>
-<br></br>
-<br></br>
+      <br></br><br></br><br></br>
+
+      <h2><center>I am Remarkable Because...</center></h2>
       <!-- Text box for whay makes you remarkable? -->
       <center><form class="" action="/remarkable" method="Post">
-        <textarea type="text" name="remarkable_post" value="" placeholder="What makes you remarkable?" style = "width:450px; height:150px;font-size:18pt;"></textarea>
-        <input action ="/thankyou" type="submit" name="" value="Submit">  <!-- Submit button -->
-      </form></center>
-
+        <textarea type="text" name="remarkable_post" value="" placeholder="What makes you remarkable?" style = "width:450px; height:150px;font-size:18pt;"></textarea></center>
       <!-- Displays current date -->
-      <center>
-          <div class="">
-            Today is {{today}}
-          </div>
-        </center>
+      <center><div class="">Today is {{today}}</div></center>
+      <h4><center><input action ="/thankyou" type="submit" name="" value="Submit"></center></h4>  <!-- Submit button -->
+      </form>
 
-        <center>
+      <br></br>
+
       <!-- Why am I remarkable? button -->
-      <button onclick = "Visible()" type="submit" name="button">Why am I remarkable?</button>
-        <div id ="motivational_display" style = "display: none;" >
-          {{prefix}}I am remarkable because {{i_am_remarkable_because}}{{suffix}}
-        </div></center>
+      <h4><center><button onclick = "Visible()" type="submit" name="button">Why am I Remarkable?</center></button></h4>
+
+      <div id ="motivational_display" style = "display: none;">
+      <center><h4>{{prefix}}I am remarkable because {{i_am_remarkable_because}}{{suffix}}</h4>
+      </div></center>
 
 
     </body>
