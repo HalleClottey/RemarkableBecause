@@ -96,6 +96,7 @@ class Quotes_Handler(webapp2.RequestHandler):
     def get(self): #for a get request
         self.response.headers['Content-Type'] = 'text/html'
         user = users.get_current_user()
+        print user
         template = JINJA_ENVIRONMENT.get_template('template/Quotes.html')
         data = {
           'user': user,
