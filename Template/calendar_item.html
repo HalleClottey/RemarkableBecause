@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Calendar</title>
+    <title></title>
   </head>
   <body>
     {% if user %}
@@ -19,24 +19,13 @@
       window.location = "/login"
     </script>
     {% endif %}
-  </body>
-    <h1>Calendar</h1>
-    <!-- Allows user to select year and date: -->
-    <!--<input type='date' id='hasta' value='<?php echo date("Y-m-d");>-->
-    <h2> {{dates}} </h2>
-    {%for date in dates %}
-    <tr>
-       {%if date==5%}
-      <a href="/calendar?calendar_param={{date}}">{{date}}</a>
-      {%else%}
-      {{date}}
-      {%endif%}
-    </tr>
-    {%endfor%}
-    <form method="post">
-      <div>Date: <input name="date" value="{{Date}}"></div>
-      <input type="submit">
-    </form>
-  </body>
 
+    {%for remarkable in all_remarkables%}
+    <div >
+      {{remarkable.remarkable_because}}
+    </div>
+
+
+    {%endfor%}
+  </body>
 </html>
