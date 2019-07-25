@@ -33,6 +33,7 @@ class Remarkable(ndb.Model):
     user = ndb.UserProperty()
     remarkable_because = ndb.StringProperty()
     date = ndb.StringProperty() #Date property
+    real_date= ndb.DateProperty()
 
 class Diary_Entry(ndb.Model):
     user = ndb.UserProperty()
@@ -182,6 +183,7 @@ class Calendar_Handler(webapp2.RequestHandler):
             if remarkable.date not in remarkables_dates:
                 remarkables_dates.append(remarkable.date)
         print(remarkables_dates)
+        calendar_param= self.request.get('calendar_param')
         data = {
           'user': user,
           'login_url': users.create_login_url('/'),
@@ -190,6 +192,31 @@ class Calendar_Handler(webapp2.RequestHandler):
         }
         self.response.headers['Content-Type'] = 'text/html'
         self.response.write(template.render(data))
+
+    def post(self):
+        displayDay = self.request.get('date')
+        self.redirect("/calendar_item?day=%s" % displayDay)
+        print("hello")
+
+
+class Calendar_Item_Handler(webapp2.RequestHandler):
+    def get(self):
+        self.response.headers['Content-Type'] = 'text/html'
+        user = users.get_current_user()
+        template = JINJA_ENVIRONMENT.get_template('Template/calendar_item.html')
+        displayDay = self.request.get('day')
+        all_remarkables = Remarkable.query(Remarkable.user == user and Remarkable.date == displayDay, ancestor=root_parent()).fetch()
+        data = {
+          'user': user,
+          'login_url': users.create_login_url('/'),
+          'logout_url': users.create_logout_url('/'),
+          'all_remarkables':all_remarkables,
+        }
+        self.response.headers['Content-Type'] = 'text/html'
+        self.response.write(template.render(data))
+        print("hi")
+        print(displayDay)
+        print(all_remarkables)
 
 class Help_Handler(webapp2.RequestHandler):
     def get(self): #for a get request
@@ -244,6 +271,7 @@ class Remarkable_Handler(webapp2.RequestHandler):
         new_response.user = user
         new_response.date = datetime.datetime.now().strftime("%B %d, %Y")
         new_response.remarkable_because = self.request.get('remarkable_post')
+        new_response.real_date=datetime.datetime.now()
         new_response.put()
         self.redirect('/thankyou')
 
@@ -296,6 +324,7 @@ app = webapp2.WSGIApplication([
     ('/diaryentry', New_Diary_Entry_Handler),
     ('/display_diary_entry', Display_Diary_Entry_Handler),
     ('/calendar', Calendar_Handler),
+    ('/calendar_item',Calendar_Item_Handler),
     ('/remarkable', Remarkable_Handler),
     ('/help', Help_Handler),
     ('/thankyou', Thank_You_Handler),

@@ -27,12 +27,17 @@
     {%for date in dates %}
     <tr>
        {%if date==5%}
-      <a href="google.com">{{date}}</a>
+      <a href="/calendar?calendar_param={{date}}">{{date}}</a>
       {%else%}
       {{date}}
       {%endif%}
     </tr>
     {%endfor%}
+    <form method="post">
+      <div>Date: <input name="date" value="{{Date}}"></div>
+      <input type="submit">
+    </form>
+    <h5>please enter date in this format: "July 24, 2019", thank you !</h5>
   </body>
 
 </html>
