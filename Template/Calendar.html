@@ -44,15 +44,18 @@
           <a href="./calendar" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Calendar</a>
           <a href="./diary" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Diary</a>
           {% else %}
-          <a href="./" class="w3-bar-item w3-button w3-padding-large w3-light-blue w3-hover-pale-blue"># I am Remarkable</a>
-          <a href="./" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Calendar</a>
-          <a href="./" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Diary</a>
+          <a href="./login" class="w3-bar-item w3-button w3-padding-large w3-light-blue w3-hover-pale-blue"># I am Remarkable</a>
+          <a href="./login" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Calendar</a>
+          <a href="./login" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Diary</a>
           {% endif %}
           <a href="./motivation" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Motivational Quotes</a>
           <a href="./resources" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Resources</a>
           <a href="./help" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue">Help</a>
+          {%if user %}
           <a href="{{logout_url}}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue w3-margin-right">Log Out</a>
-        </div>
+          {% else %}
+          <a href="{{login_url}}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue w3-margin-right">Log In</a>
+          {% endif %}        </div>
         <!-- Navbar on small screens -->
         <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
           <a href="./home" class="w3-bar-item w3-button w3-padding-large">Home</a>
@@ -61,13 +64,18 @@
           <a href="./calendar" class="w3-bar-item w3-button w3-padding-large">Calendar</a>
           <a href="./diary" class="w3-bar-item w3-button w3-padding-large">Diary</a>
           {% else %}
-          <a href="./" class="w3-bar-item w3-button w3-padding-large">#IamRemarkable</a>
-          <a href="./" class="w3-bar-item w3-button w3-padding-large">Calendar</a>
-          <a href="./" class="w3-bar-item w3-button w3-padding-large">Diary</a>
+          <a href="./login" class="w3-bar-item w3-button w3-padding-large">#IamRemarkable</a>
+          <a href="./login" class="w3-bar-item w3-button w3-padding-large">Calendar</a>
+          <a href="./login" class="w3-bar-item w3-button w3-padding-large">Diary</a>
           {% endif %}
-          <a href="./quotes" class="w3-bar-item w3-button w3-padding-large">Quotes</a>
+          <a href="./motivation" class="w3-bar-item w3-button w3-padding-large">Quotes</a>
           <a href="./resources" class="w3-bar-item w3-button w3-padding-large">Resources</a>
           <a href="./help" class="w3-bar-item w3-button w3-padding-large">Help</a>
+          {%if user %}
+          <a href="{{logout_url}}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue w3-margin-right">Log Out</a>
+          {% else %}
+          <a href="{{login_url}}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-pale-blue w3-margin-right">Log In</a>
+          {% endif %}
         </div>
       </div><br></br><br></br>
   </head>

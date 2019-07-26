@@ -102,14 +102,15 @@ class Quotes_Handler(webapp2.RequestHandler):
           'user': user,
           'login_url': users.create_login_url('/'),
           'logout_url': users.create_logout_url('/'),
+          'message':getQuotes(),
         }
         self.response.headers['Content-Type'] = 'text/html'
         self.response.write(template.render(data))
 
-    def get(self):
-        self.response.headers['Content-Type'] = 'text/html'
-        index_template = JINJA_ENVIRONMENT.get_template('template/Quotes.html')
-        self.response.write(index_template.render({'message':getQuotes()}))
+    # def get(self):
+    #     self.response.headers['Content-Type'] = 'text/html'
+    #     index_template = JINJA_ENVIRONMENT.get_template('template/Quotes.html')
+    #     self.response.write(index_template.render({'message':getQuotes()}))
 
     def post(self):
         self.response.headers['Content-Type'] = 'text/html'
@@ -207,6 +208,9 @@ class Calendar_Handler(webapp2.RequestHandler):
 
     def post(self):
         displayDay = self.request.get('date')
+        if displayDay == "":
+            self.redirect("/calendar")
+            return
         foo=datetime.datetime.strptime(displayDay,'%Y-%m-%d')
         reformated_day=foo.strftime('%B %d, %Y')
 
