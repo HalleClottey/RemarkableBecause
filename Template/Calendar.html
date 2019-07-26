@@ -29,6 +29,8 @@
         margin: 0; }
         h2 { color: #ccffff; }
         h2 span { background-color: black; padding: 1%; }
+        table { table-layout: fixed; }
+        .m { width: 50px; }
     </style>
   </head>
 
@@ -83,14 +85,14 @@
     <center><h2><span>{{month}} {{year}}</span></h2></center><br></br>
     <center>
     <table class="w3-xlarge">
-      <tr class="w3-text-bold w3-text-grey">
-        <td>M</td>
-        <td>T</td>
-        <td>W</td>
-        <td>TH</td>
-        <td>F</td>
-        <td>S</td>
-        <td>S</td>
+      <tr class="w3-text-grey">
+        <td class="m">M</td>
+        <td class="m">T</td>
+        <td class="m">W</td>
+        <td class="m">TH</td>
+        <td class="m">F</td>
+        <td class="m">S</td>
+        <td class="m">S</td>
       </tr>
       <tr>
         {% for i in range(start_date)%}
