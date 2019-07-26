@@ -68,7 +68,7 @@
   <!-- <script type="text/javascript" src="/js/main.js"></script> inside scripts tag-->
       {% for entry in entries %}
       <center>
-        <div>
+        <div id="col">
           <a href ="/display_diary_entry?entry_key={{entry.key.urlsafe()}}"><button class="w3-button w3-light-blue w3-padding-large w3-large w3-margin-top w3-hover-black">{{entry.subject}} | {{entry.date}}</button></a>
         </div></center><br></br>
       {% endfor %}
