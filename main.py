@@ -8,6 +8,7 @@ import random
 from google.appengine.ext import ndb
 import datetime
 import api_key
+import calendar
 
 #function to retrieve quotes from the api
 def getQuotes():
@@ -39,6 +40,7 @@ class Diary_Entry(ndb.Model):
     user = ndb.UserProperty()
     entry = ndb.StringProperty()
     date = ndb.StringProperty()
+    subject = ndb.StringProperty()
     # counter = ndb.IntegerProperty()
 
 # This initializes the jinja2 Environment.
@@ -52,7 +54,7 @@ class MainPage(webapp2.RequestHandler):
     def get(self): #for a get request
         self.response.headers['Content-Type'] = 'text/html'
         user = users.get_current_user()
-        template = JINJA_ENVIRONMENT.get_template('Template/homePageOne.html')
+        template = JINJA_ENVIRONMENT.get_template('template/homePageOne.html')
         data = {
           'user': user,
           'login_url': users.create_login_url('/'),
@@ -65,7 +67,7 @@ class MainPageUser(webapp2.RequestHandler):
     def get(self): #for a get request
         self.response.headers['Content-Type'] = 'text/html'
         user = users.get_current_user()
-        template = JINJA_ENVIRONMENT.get_template('Template/homepageuser.html')
+        template = JINJA_ENVIRONMENT.get_template('template/homepageuser.html')
         data = {
           'user': user,
           'login_url': users.create_login_url('/'),
@@ -78,7 +80,7 @@ class Resources_Handler(webapp2.RequestHandler):
     def get(self): #for a get request
         self.response.headers['Content-Type'] = 'text/html'
         user = users.get_current_user()
-        template = JINJA_ENVIRONMENT.get_template('Template/resources.html')
+        template = JINJA_ENVIRONMENT.get_template('template/resources.html')
         data = {
           'user': user,
           'login_url': users.create_login_url('/'),
@@ -94,7 +96,8 @@ class Quotes_Handler(webapp2.RequestHandler):
     def get(self): #for a get request
         self.response.headers['Content-Type'] = 'text/html'
         user = users.get_current_user()
-        template = JINJA_ENVIRONMENT.get_template('Template/Quotes.html')
+        print user
+        template = JINJA_ENVIRONMENT.get_template('template/Quotes.html')
         data = {
           'user': user,
           'login_url': users.create_login_url('/'),
@@ -105,12 +108,12 @@ class Quotes_Handler(webapp2.RequestHandler):
 
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
-        index_template = JINJA_ENVIRONMENT.get_template('Template/Quotes.html')
+        index_template = JINJA_ENVIRONMENT.get_template('template/Quotes.html')
         self.response.write(index_template.render({'message':getQuotes()}))
 
     def post(self):
         self.response.headers['Content-Type'] = 'text/html'
-        index_template = JINJA_ENVIRONMENT.get_template('Template/Quotes.html')
+        index_template = JINJA_ENVIRONMENT.get_template('template/Quotes.html')
         self.response.write(index_template.render({'message':getQuotes()}))
 
 
@@ -119,7 +122,7 @@ class Diary_Handler(webapp2.RequestHandler):
     def get(self): #for a get request
         self.response.headers['Content-Type'] = 'text/html'
         user = users.get_current_user()
-        template = JINJA_ENVIRONMENT.get_template('Template/Diary.html')
+        template = JINJA_ENVIRONMENT.get_template('template/Diary.html')
         data = {
           'user': user,
           'login_url': users.create_login_url('/'),
@@ -133,7 +136,7 @@ class New_Diary_Entry_Handler(webapp2.RequestHandler):
     def get(self): #for a get request
         self.response.headers['Content-Type'] = 'text/html'
         user = users.get_current_user()
-        template = JINJA_ENVIRONMENT.get_template('Template/NewDiaryEntry.html')
+        template = JINJA_ENVIRONMENT.get_template('template/NewDiaryEntry.html')
         data = {
           'user': user,
           'login_url': users.create_login_url('/'),
@@ -149,6 +152,7 @@ class New_Diary_Entry_Handler(webapp2.RequestHandler):
         new_entry.entry = self.request.get('diary_post')
         new_entry.user = user
         new_entry.date = datetime.datetime.now().strftime("%B %d, %Y")
+        new_entry.subject = self.request.get('subject_post')
         # new_entry.counter =
         new_entry.put()
         self.redirect('/diary')
@@ -159,7 +163,7 @@ class Display_Diary_Entry_Handler(webapp2.RequestHandler):
         user = users.get_current_user()
         entry_key = ndb.Key(urlsafe=self.request.get('entry_key'))
         diary_entry = entry_key.get()
-        template = JINJA_ENVIRONMENT.get_template('Template/DisplayDiaryEntry.html')
+        template = JINJA_ENVIRONMENT.get_template('template/DisplayDiaryEntry.html')
         data = {
           'user': user,
           'login_url': users.create_login_url('/'),
@@ -173,29 +177,41 @@ class Calendar_Handler(webapp2.RequestHandler):
     def get(self): #for a get request
         self.response.headers['Content-Type'] = 'text/html'
         user = users.get_current_user()
-        template = JINJA_ENVIRONMENT.get_template('Template/Calendar.html')
-        # date_key = ndb.Key(urlsafe==self.request.get('date_key'))
-        # date_entry = date_key.get()
-        dates=range(1,32)
+        template = JINJA_ENVIRONMENT.get_template('template/Calendar.html')
+        year = datetime.datetime.now().year
+        month = datetime.datetime.now().month
         remarkables=Remarkable.query(Remarkable.user == user, ancestor=root_parent()).fetch()
         remarkables_dates=[]
+
         for remarkable in remarkables:
-            if remarkable.date not in remarkables_dates:
-                remarkables_dates.append(remarkable.date)
+            if remarkable.real_date is not None:
+                if remarkable.real_date.year == year and remarkable.real_date.month==month:
+                    if remarkable.real_date not in remarkables_dates:
+                        remarkables_dates.append(remarkable.real_date.day)
         print(remarkables_dates)
         calendar_param= self.request.get('calendar_param')
+        month_range=calendar.monthrange(year,month)
+        List_months=['January','February','March','April','May','June','July','August','September','November','December']
         data = {
           'user': user,
           'login_url': users.create_login_url('/'),
           'logout_url': users.create_logout_url('/'),
-          'dates':dates
+          'start_date': month_range[0],
+          'last_day':month_range[1],
+          'year':year,
+          'month':List_months[month-1],
+          'remarkables_dates':remarkables_dates
         }
         self.response.headers['Content-Type'] = 'text/html'
         self.response.write(template.render(data))
 
     def post(self):
         displayDay = self.request.get('date')
-        self.redirect("/calendar_item?day=%s" % displayDay)
+        foo=datetime.datetime.strptime(displayDay,'%Y-%m-%d')
+        reformated_day=foo.strftime('%B %d, %Y')
+
+        #print(displayDay.strftime("%B %d, %Y"))
+        self.redirect("/calendar_item?day=%s" % reformated_day)
         print("hello")
 
 
@@ -203,7 +219,7 @@ class Calendar_Item_Handler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
         user = users.get_current_user()
-        template = JINJA_ENVIRONMENT.get_template('Template/calendar_item.html')
+        template = JINJA_ENVIRONMENT.get_template('template/calendar_item.html')
         displayDay = self.request.get('day')
         all_remarkables = Remarkable.query(Remarkable.user == user and Remarkable.date == displayDay, ancestor=root_parent()).fetch()
         data = {
@@ -222,7 +238,7 @@ class Help_Handler(webapp2.RequestHandler):
     def get(self): #for a get request
         self.response.headers['Content-Type'] = 'text/html'
         user = users.get_current_user()
-        template = JINJA_ENVIRONMENT.get_template('Template/Help.html')
+        template = JINJA_ENVIRONMENT.get_template('template/Help.html')
         data = {
           'user': user,
           'login_url': users.create_login_url('/'),
@@ -235,7 +251,7 @@ class Remarkable_Handler(webapp2.RequestHandler):
     def get(self): #for a get request
         self.response.headers['Content-Type'] = 'text/html'
         user = users.get_current_user()
-        template = JINJA_ENVIRONMENT.get_template('Template/remarkable.html')
+        template = JINJA_ENVIRONMENT.get_template('template/remarkable.html')
         all_remarkables = Remarkable.query(Remarkable.user == user, ancestor=root_parent()).fetch()
         prefix = ""
         suffix = ""
@@ -279,7 +295,7 @@ class Thank_You_Handler(webapp2.RequestHandler):
     def get(self): #for a get request
         self.response.headers['Content-Type'] = 'text/html'
         user = users.get_current_user()
-        template = JINJA_ENVIRONMENT.get_template('Template/thankyou.html')
+        template = JINJA_ENVIRONMENT.get_template('template/thankyou.html')
         data = {
           'user': user,
           'login_url': users.create_login_url('/'),
@@ -292,7 +308,7 @@ class Test_Handler(webapp2.RequestHandler):
     def get(self): #for a get request
         self.response.headers['Content-Type'] = 'text/html'
         user = users.get_current_user()
-        template = JINJA_ENVIRONMENT.get_template('Template/test.html')
+        template = JINJA_ENVIRONMENT.get_template('template/test.html')
         data = {
           'user': user,
           'login_url': users.create_login_url('/'),
@@ -305,7 +321,7 @@ class Login_Handler(webapp2.RequestHandler):
     def get(self): #for a get request
         self.response.headers['Content-Type'] = 'text/html'
         user = users.get_current_user()
-        template = JINJA_ENVIRONMENT.get_template('Template/login.html')
+        template = JINJA_ENVIRONMENT.get_template('template/login.html')
         data = {
           'user': user,
           'login_url': users.create_login_url('/'),
