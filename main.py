@@ -225,7 +225,7 @@ class Calendar_Item_Handler(webapp2.RequestHandler):
         user = users.get_current_user()
         template = JINJA_ENVIRONMENT.get_template('template/calendar_item.html')
         displayDay = self.request.get('day')
-        all_remarkables = Remarkable.query(Remarkable.user == user and Remarkable.date == displayDay, ancestor=root_parent()).fetch()
+        all_remarkables = Remarkable.query(Remarkable.user == user, ancestor=root_parent()).filter(ndb.GenericProperty("date") == displayDay).fetch()
         data = {
           'user': user,
           'login_url': users.create_login_url('/'),
